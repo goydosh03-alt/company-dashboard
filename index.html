@@ -145,7 +145,8 @@
 
   /* PLUGINS page cards */
   .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .pcard{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:17px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+  .pcard{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:17px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+  .pcard .top{padding-right:34px}
   .pcard:hover{box-shadow:var(--shadow-hover);border-color:var(--border-strong)}
   .pcard .top{display:flex;gap:12px;align-items:flex-start}
   .pcard .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
