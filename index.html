@@ -546,7 +546,7 @@
     try{
       const q = new URLSearchParams({ name, by, filename: pickedFile.name });
       const r = await fetch('/api/upload?' + q.toString(), { method:'POST', body: pickedFile });
-      if(!r.ok) throw new Error('HTTP ' + r.status);
+      if(!r.ok){ let d=''; try{ d=(await r.json()).error||''; }catch(e){} throw new Error('HTTP '+r.status+(d?' — '+d:'')); }
       await loadPlugins();                                // re-read from Blob → everyone sees it
     }catch(err){
       alert('Upload failed (' + err.message + '). Showing a local copy instead.');
