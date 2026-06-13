@@ -18,11 +18,11 @@ export default async function handler(req, res) {
     const buffer = Buffer.concat(chunks);
     if (buffer.length === 0) { res.status(400).json({ error: 'Empty file' }); return; }
 
+    const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
     const safe = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const blob = await put(`plugins/${Date.now()}-${safe}`, buffer, {
-      access: 'public',
-      contentType: 'application/zip',
-    });
+    const zipOpts = { access: 'public', contentType: 'application/zip' };
+    if (token) zipOpts.token = token;
+    const blob = await put(`plugins/${Date.now()}-${safe}`, buffer, zipOpts);
 
     const meta = {
       id: Date.now() + '-' + Math.random().toString(36).slice(2, 7),
@@ -31,10 +31,9 @@ export default async function handler(req, res) {
       date: new Date().toISOString(),
     };
     // store metadata as a small JSON blob so everyone can list it
-    await put(`meta/${meta.id}.json`, JSON.stringify(meta), {
-      access: 'public',
-      contentType: 'application/json',
-    });
+    const metaOpts = { access: 'public', contentType: 'application/json' };
+    if (token) metaOpts.token = token;
+    await put(`meta/${meta.id}.json`, JSON.stringify(meta), metaOpts);
 
     res.status(200).json({ ok: true, plugin: meta });
   } catch (err) {
