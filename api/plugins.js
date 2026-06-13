@@ -13,8 +13,9 @@ export default async function handler(req, res) {
         return r.json();
       })
     );
-    metas.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    res.status(200).json(metas);
+    const visible = metas.filter((m) => m && !m.deleted);
+    visible.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    res.status(200).json(visible);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -229,6 +229,23 @@
   .drop.has-file{border-color:#1a9d57;background:#f3fbf6}
   .drop.has-file .material-symbols-outlined{color:#1a9d57}
   .mf{display:flex;justify-content:flex-end;gap:9px;padding:14px 20px;border-top:1px solid var(--border)}
+  .field select{width:100%;border:1px solid var(--border-strong);border-radius:9px;padding:9px 11px;font-family:inherit;font-size:13px;outline:none;background:#fff;color:var(--text);cursor:pointer}
+  .field select:focus{border-color:var(--accent)}
+
+  /* 3-dots menu */
+  .dots{width:28px;height:28px;border-radius:7px;border:1px solid transparent;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--text-3);flex-shrink:0}
+  .dots:hover{background:#f0f1f3;color:var(--text)}
+  .dots .material-symbols-outlined{font-size:18px}
+  .pcard .dots{position:absolute;top:12px;right:12px}
+  .ctx-menu{position:fixed;z-index:60;background:#fff;border:1px solid var(--border);border-radius:11px;box-shadow:0 10px 30px rgba(0,0,0,.16);padding:5px;min-width:172px;display:none}
+  .ctx-menu.open{display:block}
+  .ctx-menu button{display:flex;align-items:center;gap:10px;width:100%;border:none;background:transparent;padding:8px 10px;border-radius:7px;font-family:inherit;font-size:13px;color:var(--text);cursor:pointer;text-align:left}
+  .ctx-menu button:hover{background:#f4f5f7}
+  .ctx-menu button.danger{color:var(--accent)}
+  .ctx-menu button.danger:hover{background:var(--accent-soft)}
+  .ctx-menu button.danger .material-symbols-outlined{color:var(--accent)}
+  .ctx-menu .material-symbols-outlined{font-size:18px}
+  .ctx-menu hr{border:none;border-top:1px solid var(--border);margin:4px 2px}
 
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}
@@ -415,7 +432,7 @@
 <!-- UPLOAD MODAL -->
 <div class="overlay" id="uploadOverlay">
   <div class="modal">
-    <div class="mh"><b>Upload a plugin</b><span class="material-symbols-outlined x" onclick="closeUpload()">close</span></div>
+    <div class="mh"><b id="modalTitle">Upload a plugin</b><span class="material-symbols-outlined x" onclick="closeUpload()">close</span></div>
     <div class="mb">
       <div class="drop" id="upDrop" onclick="document.getElementById('upFile').click()">
         <span class="material-symbols-outlined">cloud_upload</span>
@@ -424,7 +441,12 @@
         <input type="file" id="upFile" accept=".zip" hidden>
       </div>
       <div class="field"><label>Plugin name</label><input id="upName" placeholder="e.g. Style Builder"></div>
-      <div class="field"><label>Uploaded by</label><input id="upBy" placeholder="e.g. Sandora"></div>
+      <div class="field"><label>Uploaded by</label>
+        <select id="upBy">
+          <option value="Oleksandr Hoidosh">Oleksandr Hoidosh</option>
+          <option value="Diana Hurska">Diana Hurska</option>
+        </select>
+      </div>
     </div>
     <div class="mf">
       <button class="btn btn-ghost" onclick="closeUpload()">Cancel</button>
@@ -432,6 +454,15 @@
     </div>
   </div>
 </div>
+
+<!-- 3-dots context menu -->
+<div class="ctx-menu" id="ctxMenu">
+  <button onclick="menuEdit()"><span class="material-symbols-outlined">edit</span> Edit</button>
+  <button onclick="menuReupload()"><span class="material-symbols-outlined">upload</span> Re-upload</button>
+  <hr>
+  <button class="danger" onclick="menuDelete()"><span class="material-symbols-outlined">delete</span> Delete</button>
+</div>
+<input type="file" id="reFile" accept=".zip" hidden>
 
 <script>
   /* ---------- Page routing + Overview config ---------- */
@@ -487,12 +518,17 @@
   items.forEach(it => it.addEventListener('click', e => { e.preventDefault(); route(it.dataset.section); }));
   document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); route(el.dataset.go); }));
 
-  /* ---------- Upload demo (client-side) ---------- */
-  let pickedFile = null;
+  /* ---------- Upload + manage (Vercel Blob) ---------- */
+  let pickedFile = null, editId = null, menuId = null, reupId = null;
+  const PLUGINS = {};
   const upFile = document.getElementById('upFile');
   const upDrop = document.getElementById('upDrop');
-  function openUpload(){ document.getElementById('uploadOverlay').classList.add('open'); }
+  const ctx = document.getElementById('ctxMenu');
+  const reFile = document.getElementById('reFile');
+
+  function openUpload(){ editId=null; document.getElementById('modalTitle').textContent='Upload a plugin'; resetFields(); document.getElementById('uploadOverlay').classList.add('open'); }
   function closeUpload(){ document.getElementById('uploadOverlay').classList.remove('open'); }
+
   upFile.addEventListener('change', () => {
     pickedFile = upFile.files[0] || null;
     if(pickedFile){ upDrop.classList.add('has-file');
@@ -502,52 +538,112 @@
   upDrop.addEventListener('dragover', e => e.preventDefault());
   upDrop.addEventListener('drop', e => { e.preventDefault(); upFile.files = e.dataTransfer.files; upFile.dispatchEvent(new Event('change')); });
 
-  function insertPlugin(name, by, url, filename){
+  function insertPlugin(name, by, url, filename, id){
     const ini = (by||'A')[0].toUpperCase();
-    const card = document.createElement('div'); card.className='pcard dyn';
-    card.innerHTML = `<div class="top"><div class="ic c-red"><span class="material-symbols-outlined">deployed_code</span></div><div><h4></h4><span class="cat">New</span></div></div>
+    const dots = id ? `<button class="dots" onclick="openMenu(event,'${id}')"><span class="material-symbols-outlined">more_horiz</span></button>` : '';
+    const card = document.createElement('div'); card.className='pcard dyn'; if(id) card.dataset.id=id;
+    card.innerHTML = `${dots}<div class="top"><div class="ic c-red"><span class="material-symbols-outlined">deployed_code</span></div><div><h4></h4><span class="cat">New</span></div></div>
       <p></p><div class="foot"><div class="by"><span class="av" style="background:#e5484d">${ini}</span> ${by} · v1.0</div>
       <a class="sbtn solid" download="${filename}" target="_blank" href="${url}"><span class="material-symbols-outlined">download</span> Download</a></div>`;
     card.querySelector('h4').textContent = name; card.querySelector('p').textContent = filename;
     document.getElementById('pluginGrid').prepend(card);
-    const row = document.createElement('div'); row.className='prow dyn';
+    const row = document.createElement('div'); row.className='prow dyn'; if(id) row.dataset.id=id;
     row.innerHTML = `<div class="pic c-red"><span class="material-symbols-outlined">deployed_code</span></div>
       <div class="info"><b></b><span></span></div><div class="by"><span class="av" style="background:#e5484d">${ini}</span></div>
-      <a class="dl" download="${filename}" target="_blank" href="${url}"><span class="material-symbols-outlined">download</span></a>`;
+      <a class="dl" download="${filename}" target="_blank" href="${url}"><span class="material-symbols-outlined">download</span></a>${dots}`;
     row.querySelector('.info b').textContent = name; row.querySelector('.info span').textContent = filename;
     row.querySelector('.by').append(' '+by);
     document.getElementById('pluginList').prepend(row);
+    if(id) PLUGINS[id] = { name, by, filename, url };
   }
 
   async function loadPlugins(){
-    if(location.protocol === 'file:') return;            // opened as a local file → skip API
+    if(location.protocol === 'file:') return;
     try{
       const r = await fetch('/api/plugins'); if(!r.ok) return;
       const list = await r.json();
       document.querySelectorAll('.dyn').forEach(e => e.remove());
-      list.forEach(p => insertPlugin(p.name, p.by, p.url, p.filename));
+      for(const k in PLUGINS) delete PLUGINS[k];
+      list.forEach(p => insertPlugin(p.name, p.by, p.url, p.filename, p.id));
     }catch(e){ /* offline / not deployed */ }
   }
 
-  function resetForm(){
+  /* context menu */
+  function openMenu(e, id){ e.stopPropagation(); menuId=id; ctx.style.left=Math.min(e.clientX, window.innerWidth-190)+'px'; ctx.style.top=e.clientY+'px'; ctx.classList.add('open'); }
+  function closeMenu(){ ctx.classList.remove('open'); }
+  document.addEventListener('click', closeMenu);
+  function menuEdit(){ openEdit(menuId); }
+  function menuReupload(){ reupId=menuId; reFile.click(); }
+  function menuDelete(){ deletePlugin(menuId); }
+
+  function openEdit(id){
+    const p = PLUGINS[id]; if(!p) return;
+    editId = id;
+    document.getElementById('modalTitle').textContent = 'Edit plugin';
+    document.getElementById('upName').value = p.name;
+    const sel = document.getElementById('upBy');
+    if(![...sel.options].some(o => o.value === p.by)) sel.add(new Option(p.by, p.by));
+    sel.value = p.by;
+    upDrop.classList.remove('has-file');
+    document.getElementById('upDropTitle').textContent = 'Drop a new .zip (optional)';
+    document.getElementById('upDropHint').textContent = 'Leave empty to keep current file';
+    pickedFile = null; upFile.value='';
+    document.getElementById('uploadOverlay').classList.add('open');
+  }
+
+  reFile.addEventListener('change', async (ev) => {
+    const f = ev.target.files[0]; if(!f || !reupId) return;
+    try{
+      const q = new URLSearchParams({ id: reupId, filename: f.name });
+      const r = await fetch('/api/update?' + q.toString(), { method:'POST', body: f });
+      if(!r.ok){ let d=''; try{ d=(await r.json()).error||''; }catch(e){} throw new Error('HTTP '+r.status+(d?' — '+d:'')); }
+      await loadPlugins();
+    }catch(err){ alert('Re-upload failed: ' + err.message); }
+    ev.target.value=''; reupId=null;
+  });
+
+  async function deletePlugin(id){
+    if(!confirm('Delete this plugin? It will be hidden (soft-delete, can be restored).')) return;
+    try{
+      const r = await fetch('/api/delete?id=' + encodeURIComponent(id), { method:'POST' });
+      if(!r.ok){ let d=''; try{ d=(await r.json()).error||''; }catch(e){} throw new Error('HTTP '+r.status+(d?' — '+d:'')); }
+      await loadPlugins();
+    }catch(err){ alert('Delete failed: ' + err.message); }
+  }
+
+  function resetFields(){
     pickedFile=null; upFile.value=''; document.getElementById('upName').value=''; document.getElementById('upBy').value='';
     upDrop.classList.remove('has-file');
     document.getElementById('upDropTitle').textContent='Drop a .zip or click to browse';
     document.getElementById('upDropHint').textContent='Plugin archive (.zip)';
-    closeUpload();
   }
+  function resetForm(){ editId=null; document.getElementById('modalTitle').textContent='Upload a plugin'; resetFields(); closeUpload(); }
 
   async function submitUpload(){
     const name = document.getElementById('upName').value.trim();
     const by = document.getElementById('upBy').value.trim() || 'Anonymous';
-    if(!name || !pickedFile){ alert('Add a name and a .zip file'); return; }
-    // local file fallback (when opened without a server)
+    if(!name){ alert('Add a name'); return; }
+
+    // EDIT mode
+    if(editId){
+      try{
+        const q = new URLSearchParams({ id: editId, name, by });
+        if(pickedFile) q.set('filename', pickedFile.name);
+        const r = await fetch('/api/update?' + q.toString(), { method:'POST', body: pickedFile || '' });
+        if(!r.ok){ let d=''; try{ d=(await r.json()).error||''; }catch(e){} throw new Error('HTTP '+r.status+(d?' — '+d:'')); }
+        await loadPlugins();
+      }catch(err){ alert('Edit failed: ' + err.message); }
+      resetForm(); return;
+    }
+
+    // CREATE mode
+    if(!pickedFile){ alert('Add a .zip file'); return; }
     if(location.protocol === 'file:'){ insertPlugin(name, by, URL.createObjectURL(pickedFile), pickedFile.name); resetForm(); return; }
     try{
       const q = new URLSearchParams({ name, by, filename: pickedFile.name });
       const r = await fetch('/api/upload?' + q.toString(), { method:'POST', body: pickedFile });
       if(!r.ok){ let d=''; try{ d=(await r.json()).error||''; }catch(e){} throw new Error('HTTP '+r.status+(d?' — '+d:'')); }
-      await loadPlugins();                                // re-read from Blob → everyone sees it
+      await loadPlugins();
     }catch(err){
       alert('Upload failed (' + err.message + '). Showing a local copy instead.');
       insertPlugin(name, by, URL.createObjectURL(pickedFile), pickedFile.name);
