@@ -2,8 +2,15 @@
 import Shell from '../layouts/Shell.astro';
 import content from '../fragments/figma.html?raw';
 import figmaModal from '../fragments/_figmamodal.html?raw';
+const overview = [
+  { flag: '📱', label: 'Native', market: 'Native', active: true },
+  { flag: '🇰🇿', label: 'Kazakhstan', market: 'Kazakhstan' },
+  { flag: '🇪🇺', label: 'COM', market: 'COM' },
+  { flag: '🇧🇩', label: 'Bangladesh', market: 'Bangladesh' },
+  { flag: '🌍', label: 'Africa', market: 'Africa' },
+];
 ---
-<Shell active="Figma" title="Figma" crumb="/ Figma">
+<Shell active="Figma" title="Figma" crumb="/ Figma" overview={overview}>
   <Fragment set:html={content} />
   <Fragment set:html={figmaModal} />
   <script is:inline src="/js/figma.js"></script>

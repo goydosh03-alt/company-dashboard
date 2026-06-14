@@ -46,7 +46,7 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
         <div>
           {overview.map((it) => it.divider
             ? <div class="s-label">{it.divider}</div>
-            : <a class={"s-item" + (it.active ? ' active' : '')}><span class="material-symbols-outlined">{it.icon}</span> {it.label} {it.count != null && <span class="count">{it.count}</span>}</a>
+            : <a class={"s-item" + (it.active ? ' active' : '')} data-market={it.market}>{it.flag ? <span class="flag">{it.flag}</span> : <span class="material-symbols-outlined">{it.icon}</span>} {it.label} {it.count != null && <span class="count">{it.count}</span>}</a>
           )}
         </div>
       </aside>

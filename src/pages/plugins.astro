@@ -4,13 +4,7 @@ import content from '../fragments/plugins.html?raw';
 import uploadModal from '../fragments/_uploadmodal.html?raw';
 import ctxMenu from '../fragments/_ctxmenu.html?raw';
 const overview = [
-  { icon: 'apps', label: 'All plugins', count: 6, active: true },
-  { icon: 'star', label: 'Featured' },
-  { icon: 'schedule', label: 'Recently added' },
-  { divider: 'Categories' },
-  { icon: 'palette', label: 'Tokens', count: 2 },
-  { icon: 'widgets', label: 'Components', count: 3 },
-  { icon: 'image', label: 'Assets', count: 1 },
+  { icon: 'apps', label: 'All plugins', active: true },
 ];
 ---
 <Shell active="Plugins" title="Plugins" crumb="/ Plugins" overview={overview}>

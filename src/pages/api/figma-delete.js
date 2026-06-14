@@ -1,8 +1,9 @@
-import { list, put } from '@vercel/blob';
+import { list, del } from '@vercel/blob';
 export const prerender = false;
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { 'content-type': 'application/json' } });
 
+// POST /api/figma-delete?id=  → permanently removes a Figma-file card
 export async function POST({ request }) {
   try {
     const url = new URL(request.url);
@@ -15,8 +16,7 @@ export async function POST({ request }) {
     for (const b of blobs) {
       const meta = await (await fetch(b.url)).json();
       if (meta.id === id) {
-        meta.deleted = true; meta.deletedAt = new Date().toISOString();
-        await put(b.pathname, JSON.stringify(meta), { access: 'public', contentType: 'application/json', allowOverwrite: true, addRandomSuffix: false, ...t });
+        await del(b.url, t);
         return json({ ok: true });
       }
     }

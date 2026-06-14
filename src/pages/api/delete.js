@@ -1,8 +1,9 @@
-import { list, put } from '@vercel/blob';
+import { list, del } from '@vercel/blob';
 export const prerender = false;
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { 'content-type': 'application/json' } });
 
+// POST /api/delete?id=  → permanently removes the plugin (zip + metadata) from Blob
 export async function POST({ request }) {
   try {
     const url = new URL(request.url);
@@ -15,9 +16,10 @@ export async function POST({ request }) {
     for (const b of blobs) {
       const meta = await (await fetch(b.url)).json();
       if (meta.id === id) {
-        meta.deleted = true; meta.deletedAt = new Date().toISOString();
-        await put(b.pathname, JSON.stringify(meta), { access: 'public', contentType: 'application/json', allowOverwrite: true, addRandomSuffix: false, ...t });
-        return json({ ok: true });
+        const targets = [b.url];           // the metadata json
+        if (meta.url) targets.push(meta.url); // the uploaded .zip
+        await del(targets, t);
+        return json({ ok: true, deleted: targets.length });
       }
     }
     return json({ error: 'Plugin not found' }, 404);

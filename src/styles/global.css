@@ -305,6 +305,7 @@
   .del-warn .material-symbols-outlined{color:var(--accent);font-size:26px;flex-shrink:0;margin-top:1px}
   .del-warn p{font-size:13.5px;color:var(--text-2);line-height:1.5}
   .del-warn b{color:var(--text)}
+  .s-item .flag{font-size:16px;width:20px;display:inline-block;text-align:center;line-height:1}
 
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}

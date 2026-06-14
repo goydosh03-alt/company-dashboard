@@ -7,9 +7,9 @@
   window.openFigma = function () { $('fgName').value = ''; $('fgLink').value = ''; $('fgDesc').value = ''; $('fgMarket').value = market; $('figmaOverlay').classList.add('open'); };
   window.closeFigma = function () { $('figmaOverlay').classList.remove('open'); };
 
-  document.querySelectorAll('#figmaTabs .chip-btn').forEach((b) => b.addEventListener('click', () => {
-    document.querySelectorAll('#figmaTabs .chip-btn').forEach((x) => x.classList.remove('active'));
-    b.classList.add('active'); market = b.dataset.market; render();
+  document.querySelectorAll('.sub .s-item[data-market]').forEach((b) => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    setTab(b.dataset.market); render();
   }));
 
   async function load() { try { const r = await fetch('/api/figma'); if (!r.ok) return; FIGMA = await r.json(); render(); flashFromQuery(); } catch (e) {} }
@@ -44,7 +44,7 @@
       grid.appendChild(el);
     });
   }
-  function setTab(m) { market = m; document.querySelectorAll('#figmaTabs .chip-btn').forEach((x) => x.classList.toggle('active', x.dataset.market === m)); }
+  function setTab(m) { market = m; document.querySelectorAll('.sub .s-item[data-market]').forEach((x) => x.classList.toggle('active', x.dataset.market === m)); }
 
   window.submitFigma = async function () {
     const name = $('fgName').value.trim(), mk = $('fgMarket').value, link = $('fgLink').value.trim(), description = $('fgDesc').value.trim();
