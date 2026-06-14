@@ -248,13 +248,32 @@
   .ctx-menu .material-symbols-outlined{font-size:18px}
   .ctx-menu hr{border:none;border-top:1px solid var(--border);margin:4px 2px}
 
+  /* Figma files */
+  .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .fcard{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .fcard:hover{box-shadow:var(--shadow-hover)}
+  .fcover{height:118px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;text-align:center;padding:0 16px;line-height:1.25}
+  .fcard .fbody{padding:14px 16px;display:flex;flex-direction:column;gap:5px;flex:1}
+  .fcard h4{font-size:14px;font-weight:650}
+  .fcard .fdesc{font-size:12.5px;color:var(--text-2);flex:1}
+  .fcard .ffoot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .fcard .fmkt{font-size:11px;font-weight:600;color:var(--text-3);background:#f4f5f7;border-radius:20px;padding:2px 9px}
+  .fcard .dots{position:absolute;top:9px;right:9px;background:rgba(255,255,255,.9)}
+  .fcard .dots:hover{background:#fff;color:var(--accent)}
+  .empty{padding:42px;text-align:center;color:var(--text-3);font-size:13.5px;border:1px dashed var(--border-strong);border-radius:14px}
+  .mk-Native{background:linear-gradient(135deg,#e5484d,#f0813a)}
+  .mk-Kazakhstan{background:linear-gradient(135deg,#3b6cf6,#5ea0ff)}
+  .mk-COM{background:linear-gradient(135deg,#16181d,#3a3f4a)}
+  .mk-Bangladesh{background:linear-gradient(135deg,#1a9d57,#4fd08a)}
+  .mk-Africa{background:linear-gradient(135deg,#e08a1e,#f0b441)}
+
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}
     .brand b,.brand small,.m-item .txt,.m-item .ext,.m-label,.m-user .meta,.m-user>.material-symbols-outlined{display:none}
     .m-item{justify-content:center}
     .sub{display:none}
     .stats{grid-template-columns:repeat(2,1fr)}.grid-2,.pgrid{grid-template-columns:1fr}
-    .swatches{grid-template-columns:repeat(3,1fr)}.tile-row{grid-template-columns:repeat(2,1fr)}.cgrid{grid-template-columns:repeat(2,1fr)}
+    .swatches{grid-template-columns:repeat(3,1fr)}.tile-row{grid-template-columns:repeat(2,1fr)}.cgrid,.fgrid{grid-template-columns:repeat(2,1fr)}
   }
 </style>
 </head>
@@ -425,6 +444,23 @@
           </div>
         </section>
 
+        <!-- ============ FIGMA ============ -->
+        <section class="page" id="page-Figma">
+          <div class="page-head">
+            <div><h2>Figma files</h2><p>Project files per market. Quick-open or add a new one.</p></div>
+            <button class="up-btn" onclick="openFigma()"><span class="material-symbols-outlined">add</span> Add file</button>
+          </div>
+          <div class="toolbar" id="figmaTabs">
+            <button class="chip-btn active" data-market="Native">Native</button>
+            <button class="chip-btn" data-market="Kazakhstan">Kazakhstan</button>
+            <button class="chip-btn" data-market="COM">COM</button>
+            <button class="chip-btn" data-market="Bangladesh">Bangladesh</button>
+            <button class="chip-btn" data-market="Africa">Africa</button>
+          </div>
+          <div class="fgrid" id="figmaGrid"></div>
+          <div class="empty" id="figmaEmpty" style="display:none">No files for this market yet — click “Add file”.</div>
+        </section>
+
       </main>
     </div>
   </div>
@@ -446,6 +482,9 @@
         <select id="upBy">
           <option value="Oleksandr Hoidosh">Oleksandr Hoidosh</option>
           <option value="Diana Hurska">Diana Hurska</option>
+          <option value="Aleksandr Tsarenko">Aleksandr Tsarenko</option>
+          <option value="Kateryna Yefemenko">Kateryna Yefemenko</option>
+          <option value="Pavlo Semenishin">Pavlo Semenishin</option>
         </select>
       </div>
     </div>
@@ -464,6 +503,27 @@
   <button class="danger" onclick="menuDelete()"><span class="material-symbols-outlined">delete</span> Delete</button>
 </div>
 <input type="file" id="reFile" accept=".zip" hidden>
+
+<!-- ADD FIGMA FILE MODAL -->
+<div class="overlay" id="figmaOverlay">
+  <div class="modal">
+    <div class="mh"><b id="figmaTitle">Add Figma file</b><span class="material-symbols-outlined x" onclick="closeFigma()">close</span></div>
+    <div class="mb">
+      <div class="field"><label>File name</label><input id="fgName" placeholder="e.g. Native — Home redesign"></div>
+      <div class="field"><label>Market</label>
+        <select id="fgMarket">
+          <option>Native</option><option>Kazakhstan</option><option>COM</option><option>Bangladesh</option><option>Africa</option>
+        </select>
+      </div>
+      <div class="field"><label>Figma link</label><input id="fgLink" placeholder="https://www.figma.com/file/..."></div>
+      <div class="field"><label>Short description (optional)</label><input id="fgDesc" placeholder="What's inside"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost" onclick="closeFigma()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitFigma()"><span class="material-symbols-outlined">add</span> Add file</button>
+    </div>
+  </div>
+</div>
 
 <script>
   /* ---------- Page routing + Overview config ---------- */
@@ -486,8 +546,8 @@
       {icon:'foundation',label:'Foundations',active:true},{icon:'campaign',label:'Voice & Tone'},
       {icon:'accessibility_new',label:'Accessibility'},{icon:'volunteer_activism',label:'Contribution'}
     ]},
-    GitHub:     { crumb:'/ GitHub', overview:null, external:true },
-    Figma:      { crumb:'/ Figma', overview:null, external:true }
+    GitHub:     { crumb:'/ GitHub', overview:null, external:'https://github.com/goydosh03-alt/company-dashboard' },
+    Figma:      { crumb:'/ Figma', overview:null }
   };
 
   const items = document.querySelectorAll('.m-item');
@@ -505,14 +565,14 @@
 
   function route(section){
     const cfg = PAGES[section]; if(!cfg) return;
+    if(cfg.external){ window.open(cfg.external, '_blank'); return; }   // GitHub → open repo
     items.forEach(x => x.classList.toggle('active', x.dataset.section===section));
     document.getElementById('pageTitle').textContent = section;
     document.getElementById('pageCrumb').textContent = cfg.crumb;
-    // external links (GitHub/Figma) — keep current page, just show alert in demo
-    if(cfg.external){ document.body.classList.add('home'); return; }
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id==='page-'+section));
     if(cfg.overview){ document.body.classList.remove('home'); buildOverview(section, cfg); }
     else { document.body.classList.add('home'); }
+    if(section==='Figma') loadFigma();
     document.querySelector('.panel-main').scrollTop = 0;
   }
 
@@ -653,6 +713,70 @@
   }
 
   loadPlugins();   // load existing uploads on page open
+
+  /* ---------- Figma files (market tabs + cards) ---------- */
+  let FIGMA = [], figmaMarket = 'Native';
+  function openFigma(){
+    document.getElementById('fgName').value=''; document.getElementById('fgLink').value=''; document.getElementById('fgDesc').value='';
+    document.getElementById('fgMarket').value = figmaMarket;
+    document.getElementById('figmaOverlay').classList.add('open');
+  }
+  function closeFigma(){ document.getElementById('figmaOverlay').classList.remove('open'); }
+
+  document.querySelectorAll('#figmaTabs .chip-btn').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#figmaTabs .chip-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); figmaMarket = b.dataset.market; renderFigma();
+  }));
+
+  async function loadFigma(){
+    if(location.protocol === 'file:'){ renderFigma(); return; }
+    try{ const r = await fetch('/api/figma'); if(!r.ok) return; FIGMA = await r.json(); renderFigma(); }catch(e){ /* offline */ }
+  }
+  function renderFigma(){
+    const grid = document.getElementById('figmaGrid');
+    const list = FIGMA.filter(f => f.market === figmaMarket);
+    grid.innerHTML = '';
+    document.getElementById('figmaEmpty').style.display = list.length ? 'none' : 'block';
+    list.forEach(f => {
+      const el = document.createElement('div'); el.className = 'fcard';
+      el.innerHTML = `<button class="dots" onclick="deleteFigma(event,'${f.id}')"><span class="material-symbols-outlined">delete</span></button>
+        <div class="fcover mk-${f.market}"></div>
+        <div class="fbody"><h4></h4><div class="fdesc"></div>
+          <div class="ffoot"><span class="fmkt">${f.market}</span>
+          <a class="sbtn solid" target="_blank" href="${f.link}"><span class="material-symbols-outlined">open_in_new</span> Open</a></div></div>`;
+      el.querySelector('.fcover').textContent = f.name;   // cover shows the file name
+      el.querySelector('h4').textContent = f.name;
+      el.querySelector('.fdesc').textContent = f.description || '';
+      grid.appendChild(el);
+    });
+  }
+  function setFigmaTab(m){ figmaMarket = m; document.querySelectorAll('#figmaTabs .chip-btn').forEach(x => x.classList.toggle('active', x.dataset.market === m)); }
+
+  async function submitFigma(){
+    const name = document.getElementById('fgName').value.trim();
+    const market = document.getElementById('fgMarket').value;
+    const link = document.getElementById('fgLink').value.trim();
+    const description = document.getElementById('fgDesc').value.trim();
+    if(!name || !link){ alert('Add a name and a Figma link'); return; }
+    if(location.protocol === 'file:'){ FIGMA.unshift({ id:'local'+Date.now(), name, market, link, description }); setFigmaTab(market); renderFigma(); closeFigma(); return; }
+    try{
+      const q = new URLSearchParams({ name, market, link, description });
+      const r = await fetch('/api/figma?' + q.toString(), { method:'POST' });
+      if(!r.ok){ let d=''; try{ d=(await r.json()).error||''; }catch(e){} throw new Error('HTTP '+r.status+(d?' — '+d:'')); }
+      await loadFigma();
+    }catch(err){ alert('Add failed: ' + err.message); }
+    setFigmaTab(market); renderFigma(); closeFigma();
+  }
+
+  async function deleteFigma(e, id){
+    e.stopPropagation();
+    if(!confirm('Delete this Figma file card?')) return;
+    try{
+      const r = await fetch('/api/figma-delete?id=' + encodeURIComponent(id), { method:'POST' });
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      await loadFigma();
+    }catch(err){ alert('Delete failed: ' + err.message); }
+  }
 </script>
 </body>
 </html>
