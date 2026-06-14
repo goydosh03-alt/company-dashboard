@@ -296,6 +296,16 @@
   .flash{animation:flash 1.6s ease}
   @keyframes flash{0%{box-shadow:0 0 0 3px var(--accent)}55%{box-shadow:0 0 0 3px var(--accent)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
 
+  /* delete confirmation modal */
+  .modal-sm{width:420px}
+  .btn-danger{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn-danger:hover{background:var(--accent-hover)}
+  .btn-danger .material-symbols-outlined{color:#fff}
+  .del-warn{display:flex;gap:13px;align-items:flex-start}
+  .del-warn .material-symbols-outlined{color:var(--accent);font-size:26px;flex-shrink:0;margin-top:1px}
+  .del-warn p{font-size:13.5px;color:var(--text-2);line-height:1.5}
+  .del-warn b{color:var(--text)}
+
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}
     .brand b,.brand small,.m-item .txt,.m-item .ext,.m-label,.m-user .meta,.m-user>.material-symbols-outlined{display:none}

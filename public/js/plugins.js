@@ -3,7 +3,7 @@
   const upFile = $('upFile'), upDrop = $('upDrop'), ctx = $('ctxMenu'), reFile = $('reFile');
   if (!upFile) return; // page without the plugin UI
 
-  let pickedFile = null, editId = null, menuId = null, reupId = null;
+  let pickedFile = null, editId = null, menuId = null, reupId = null, delId = null;
   const PLUGINS = {};
 
   // ---- custom "Uploaded by" dropdown ----
@@ -104,7 +104,13 @@
   document.addEventListener('click', () => { if (ctx) ctx.classList.remove('open'); });
   window.menuEdit = function () { openEdit(menuId); };
   window.menuReupload = function () { reupId = menuId; reFile.click(); };
-  window.menuDelete = function () { deletePlugin(menuId); };
+  window.menuDelete = function () {
+    delId = menuId;
+    const p = PLUGINS[delId];
+    $('delName').textContent = p ? p.name : 'this plugin';
+    $('deleteOverlay').classList.add('open');
+  };
+  window.closeDelete = function () { $('deleteOverlay').classList.remove('open'); delId = null; };
 
   function openEdit(id) {
     const p = PLUGINS[id]; if (!p) return;
@@ -126,14 +132,18 @@
     ev.target.value = ''; reupId = null;
   });
 
-  async function deletePlugin(id) {
-    if (!confirm('Delete this plugin? It will be hidden (soft-delete).')) return;
+  window.confirmDelete = async function () {
+    const id = delId; if (!id) return;
+    const btn = document.querySelector('#deleteOverlay .btn-danger');
+    if (btn) { btn.disabled = true; btn.style.opacity = '.6'; }
     try {
       const r = await fetch('/api/delete?id=' + encodeURIComponent(id), { method: 'POST' });
       if (!r.ok) { let d = ''; try { d = (await r.json()).error || ''; } catch (e) {} throw new Error('HTTP ' + r.status + (d ? ' — ' + d : '')); }
       await loadPlugins();
     } catch (err) { alert('Delete failed: ' + err.message); }
-  }
+    if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+    window.closeDelete();
+  };
 
   function resetFields() {
     pickedFile = null; upFile.value = ''; $('upName').value = ''; $('upDesc').value = ''; setUploader('Oleksandr Hoidosh');

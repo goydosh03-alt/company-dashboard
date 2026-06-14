@@ -6,3 +6,20 @@
   <button class="danger" onclick="menuDelete()"><span class="material-symbols-outlined">delete</span> Delete</button>
 </div>
 <input type="file" id="reFile" accept=".zip" hidden>
+
+<!-- DELETE CONFIRMATION MODAL -->
+<div class="overlay" id="deleteOverlay">
+  <div class="modal modal-sm">
+    <div class="mh"><b>Delete plugin</b><span class="material-symbols-outlined x" onclick="closeDelete()">close</span></div>
+    <div class="mb">
+      <div class="del-warn">
+        <span class="material-symbols-outlined">warning</span>
+        <p>Delete <b id="delName">this plugin</b> from the system? It disappears from the list for everyone. This is a soft-delete — files are kept and an admin can restore it.</p>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost" onclick="closeDelete()">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmDelete()"><span class="material-symbols-outlined">delete</span> Delete plugin</button>
+    </div>
+  </div>
+</div>
