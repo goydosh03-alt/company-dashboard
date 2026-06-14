@@ -50,7 +50,16 @@
   }
 
   function updateEmpty() {
-    const grid = $('pluginGrid'); if (grid) { const e = $('pluginEmpty'); if (e) e.style.display = grid.querySelector('.pcard') ? 'none' : 'block'; }
+    const grid = $('pluginGrid');
+    if (grid) {
+      const e = $('pluginEmpty'); if (e) e.style.display = grid.querySelector('.pcard') ? 'none' : 'block';
+      // live count on the "All plugins" side-panel item
+      const allItem = document.querySelector('.sub .s-item');
+      if (allItem) {
+        let c = allItem.querySelector('.count'); if (!c) { c = document.createElement('span'); c.className = 'count'; allItem.appendChild(c); }
+        c.textContent = grid.querySelectorAll('.pcard').length;
+      }
+    }
     const list = $('pluginList'); if (list) { const e = $('pluginListEmpty'); if (e) e.style.display = list.querySelector('.prow') ? 'none' : 'block'; }
   }
 
