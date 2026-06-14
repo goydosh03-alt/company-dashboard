@@ -1,0 +1,28 @@
+<!-- UPLOAD MODAL -->
+<div class="overlay" id="uploadOverlay">
+  <div class="modal">
+    <div class="mh"><b id="modalTitle">Upload a plugin</b><span class="material-symbols-outlined x" onclick="closeUpload()">close</span></div>
+    <div class="mb">
+      <div class="drop" id="upDrop" onclick="document.getElementById('upFile').click()">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        <b id="upDropTitle">Drop a .zip or click to browse</b>
+        <span id="upDropHint">Plugin archive (.zip)</span>
+        <input type="file" id="upFile" accept=".zip" hidden>
+      </div>
+      <div class="field"><label>Plugin name</label><input id="upName" placeholder="e.g. Style Builder"></div>
+      <div class="field"><label>Uploaded by</label>
+        <select id="upBy">
+          <option value="Oleksandr Hoidosh">Oleksandr Hoidosh</option>
+          <option value="Diana Hurska">Diana Hurska</option>
+          <option value="Aleksandr Tsarenko">Aleksandr Tsarenko</option>
+          <option value="Kateryna Yefemenko">Kateryna Yefemenko</option>
+          <option value="Pavlo Semenishin">Pavlo Semenishin</option>
+        </select>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost" onclick="closeUpload()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitUpload()"><span class="material-symbols-outlined">upload</span> Upload</button>
+    </div>
+  </div>
+</div>

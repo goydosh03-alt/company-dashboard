@@ -1,3 +1,9 @@
 node_modules
+dist
 .vercel
 .DS_Store
+# local build caches (safe to delete from the folder)
+.npmcache
+nc
+.pnpm-store
+.astro

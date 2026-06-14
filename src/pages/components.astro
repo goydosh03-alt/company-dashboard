@@ -1,0 +1,15 @@
+---
+import Shell from '../layouts/Shell.astro';
+import content from '../fragments/components.html?raw';
+const overview = [
+  { icon: 'apps', label: 'All', active: true },
+  { icon: 'smart_button', label: 'Buttons' },
+  { icon: 'edit', label: 'Inputs' },
+  { icon: 'crop_square', label: 'Cards' },
+  { icon: 'menu', label: 'Navigation' },
+  { icon: 'notifications', label: 'Feedback' },
+];
+---
+<Shell active="Components" title="Components" crumb="/ Components" overview={overview}>
+  <Fragment set:html={content} />
+</Shell>

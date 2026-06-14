@@ -1,0 +1,13 @@
+---
+import Shell from '../layouts/Shell.astro';
+import content from '../fragments/guidelines.html?raw';
+const overview = [
+  { icon: 'foundation', label: 'Foundations', active: true },
+  { icon: 'campaign', label: 'Voice & Tone' },
+  { icon: 'accessibility_new', label: 'Accessibility' },
+  { icon: 'volunteer_activism', label: 'Contribution' },
+];
+---
+<Shell active="Guidelines" title="Guidelines" crumb="/ Guidelines" overview={overview}>
+  <Fragment set:html={content} />
+</Shell>

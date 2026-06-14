@@ -1,0 +1,10 @@
+---
+import Shell from '../layouts/Shell.astro';
+import content from '../fragments/figma.html?raw';
+import figmaModal from '../fragments/_figmamodal.html?raw';
+---
+<Shell active="Figma" title="Figma" crumb="/ Figma">
+  <Fragment set:html={content} />
+  <Fragment set:html={figmaModal} />
+  <script is:inline src="/js/figma.js"></script>
+</Shell>

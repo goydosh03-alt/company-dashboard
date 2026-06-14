@@ -1,0 +1,14 @@
+---
+import Shell from '../layouts/Shell.astro';
+import content from '../fragments/tokens.html?raw';
+const overview = [
+  { icon: 'format_color_fill', label: 'Colors', active: true },
+  { icon: 'text_fields', label: 'Typography' },
+  { icon: 'rounded_corner', label: 'Radius' },
+  { icon: 'gradient', label: 'Shadows' },
+  { icon: 'space_bar', label: 'Spacing' },
+];
+---
+<Shell active="Tokens" title="Tokens" crumb="/ Tokens" overview={overview}>
+  <Fragment set:html={content} />
+</Shell>

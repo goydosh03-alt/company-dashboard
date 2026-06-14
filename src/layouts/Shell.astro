@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+
+const { active = 'Home', title = 'Home', crumb = '/ Overview', overview = null } = Astro.props;
+
+const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pin-Up · Design System Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- L1 GENERAL MENU -->
+    <nav class="menu">
+      <div class="brand"><div class="logo">P</div><div><b>Pin-Up</b><small>Design System</small></div></div>
+
+      <a class={"m-item" + (active === 'Home' ? ' active' : '')} href="/"><span class="material-symbols-outlined">home</span> <span class="txt">Home</span></a>
+
+      <div class="m-label">Library</div>
+      <a class={"m-item" + (active === 'Plugins' ? ' active' : '')} href="/plugins"><span class="material-symbols-outlined">extension</span> <span class="txt">Plugins</span></a>
+      <a class={"m-item" + (active === 'Tokens' ? ' active' : '')} href="/tokens"><span class="material-symbols-outlined">palette</span> <span class="txt">Tokens</span></a>
+      <a class={"m-item" + (active === 'Components' ? ' active' : '')} href="/components"><span class="material-symbols-outlined">widgets</span> <span class="txt">Components</span></a>
+      <a class={"m-item" + (active === 'Guidelines' ? ' active' : '')} href="/guidelines"><span class="material-symbols-outlined">menu_book</span> <span class="txt">Guidelines</span></a>
+
+      <div class="m-label">Resources</div>
+      <a class="m-item" href={REPO} target="_blank"><span class="material-symbols-outlined">code</span> <span class="txt">GitHub</span> <span class="material-symbols-outlined ext">open_in_new</span></a>
+      <a class={"m-item" + (active === 'Figma' ? ' active' : '')} href="/figma"><span class="material-symbols-outlined">design_services</span> <span class="txt">Figma</span></a>
+
+      <div class="m-spacer"></div>
+      <div class="m-user"><div class="ava">PU</div><div class="meta"><b>Pin-Up Team</b><span>Workspace</span></div><span class="material-symbols-outlined">unfold_more</span></div>
+    </nav>
+
+    <!-- L2 OVERVIEW (rendered only when provided) -->
+    {overview && (
+      <aside class="sub">
+        <div class="sub-head"><h2>{title}</h2><span class="material-symbols-outlined">unfold_more</span></div>
+        <div>
+          {overview.map((it) => it.divider
+            ? <div class="s-label">{it.divider}</div>
+            : <a class={"s-item" + (it.active ? ' active' : '')}><span class="material-symbols-outlined">{it.icon}</span> {it.label} {it.count != null && <span class="count">{it.count}</span>}</a>
+          )}
+        </div>
+      </aside>
+    )}
+
+    <!-- L3 CONTENT -->
+    <div class="stage">
+      <div class="panel-main">
+        <header class="ptop">
+          <h1>{title}</h1>
+          <span class="crumb">{crumb}</span>
+          <div class="search"><span class="material-symbols-outlined">search</span><input placeholder="Search the guide…" /><kbd>⌘K</kbd></div>
+          <button class="icon-btn"><span class="material-symbols-outlined">dark_mode</span></button>
+        </header>
+        <main class="content">
+          <slot />
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline src="/js/app.js"></script>
+</body>
+</html>
