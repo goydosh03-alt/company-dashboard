@@ -307,6 +307,21 @@
   .del-warn b{color:var(--text)}
   .s-item .flag{font-size:16px;width:20px;display:inline-block;text-align:center;line-height:1}
 
+  /* GitHub page: repo link card + flow */
+  .repo-card{display:flex;align-items:center;gap:14px;border:1px solid var(--border-strong);border-radius:14px;padding:15px 17px;text-decoration:none;color:inherit;background:#fff;box-shadow:var(--shadow);margin:6px 0 22px;transition:.15s}
+  .repo-card:hover{border-color:var(--accent);box-shadow:var(--shadow-hover)}
+  .repo-card .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+  .repo-card .ic .material-symbols-outlined{font-size:23px}
+  .repo-card .rc-meta{flex:1}
+  .repo-card .rc-meta b{font-size:14.5px;font-weight:650;display:block}
+  .repo-card .rc-meta span{font-size:12.5px;color:var(--text-3)}
+  .repo-card .rc-go{color:var(--text-3);font-size:20px}
+  .repo-card:hover .rc-go{color:var(--accent)}
+  .flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .flow-step{display:inline-flex;align-items:center;gap:7px;background:#f6f7f9;border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-size:13px;font-weight:600;color:var(--text)}
+  .flow-step .material-symbols-outlined{font-size:18px;color:var(--accent)}
+  .flow-arrow{color:var(--text-3);font-size:18px}
+
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}
     .brand b,.brand small,.m-item .txt,.m-item .ext,.m-label,.m-user .meta,.m-user>.material-symbols-outlined{display:none}

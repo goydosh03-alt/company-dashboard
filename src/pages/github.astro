@@ -1,0 +1,7 @@
+---
+import Shell from '../layouts/Shell.astro';
+import content from '../fragments/github.html?raw';
+---
+<Shell active="GitHub" title="GitHub" crumb="/ GitHub">
+  <Fragment set:html={content} />
+</Shell>

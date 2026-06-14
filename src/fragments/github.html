@@ -1,0 +1,31 @@
+<div class="doc">
+  <h2>How this hub works</h2>
+  <p class="lead">The whole guide lives in one GitHub repository and deploys itself. Here's the principle, so anyone on the team can understand and contribute.</p>
+
+  <a class="repo-card" href="https://github.com/goydosh03-alt/company-dashboard" target="_blank" rel="noopener">
+    <div class="ic c-red"><span class="material-symbols-outlined">code</span></div>
+    <div class="rc-meta"><b>company-dashboard</b><span>github.com/goydosh03-alt/company-dashboard</span></div>
+    <span class="material-symbols-outlined rc-go">open_in_new</span>
+  </a>
+
+  <h3>1 · One source of truth</h3>
+  <p>The repository holds the entire site — pages, styles and logic. Nothing lives on someone's laptop; the repo is always the up-to-date version everyone sees.</p>
+
+  <h3>2 · It deploys itself</h3>
+  <p>Every push to the <b>main</b> branch triggers Vercel to rebuild and publish automatically in about a minute. No manual deploy, no server to manage.</p>
+
+  <h3>3 · Live data — no rebuild needed</h3>
+  <p>Plugins (.zip files) and Figma file cards are uploaded right here in the app and stored in Vercel Blob. They appear for everyone instantly — the page reads them live, so you don't touch the repo to add or remove them.</p>
+
+  <h3>4 · Editing text & guidelines</h3>
+  <p>Written pages and guidelines are simple files in the repo. To change them, open a pull request on GitHub — after merge, the site rebuilds and shows the new version.</p>
+
+  <h3>The flow in one line</h3>
+  <div class="flow">
+    <span class="flow-step"><span class="material-symbols-outlined">edit</span> Edit / upload</span>
+    <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
+    <span class="flow-step"><span class="material-symbols-outlined">cloud_sync</span> Push to GitHub / save to Blob</span>
+    <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
+    <span class="flow-step"><span class="material-symbols-outlined">public</span> Live for the team</span>
+  </div>
+</div>
