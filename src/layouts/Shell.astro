@@ -58,7 +58,7 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
         <header class="ptop">
           <h1>{title}</h1>
           <span class="crumb">{crumb}</span>
-          <div class="search"><span class="material-symbols-outlined">search</span><input placeholder="Search the guide…" /><kbd>⌘K</kbd></div>
+          <div class="search" onclick="openSearch()"><span class="material-symbols-outlined">search</span><input placeholder="Search the guide…" readonly /><kbd>⌘K</kbd></div>
           <button class="icon-btn"><span class="material-symbols-outlined">dark_mode</span></button>
         </header>
         <main class="content">
@@ -68,6 +68,19 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
     </div>
   </div>
 
+  <!-- GLOBAL SEARCH (command palette) -->
+  <div class="overlay search-overlay" id="searchOverlay">
+    <div class="cmdk">
+      <div class="cmdk-top">
+        <span class="material-symbols-outlined">search</span>
+        <input id="cmdkInput" placeholder="Search plugins, Figma files, pages…" oninput="runSearch(this.value)" />
+        <kbd>Esc</kbd>
+      </div>
+      <div class="cmdk-results" id="cmdkResults"></div>
+    </div>
+  </div>
+
   <script is:inline src="/js/app.js"></script>
+  <script is:inline src="/js/search.js"></script>
 </body>
 </html>
