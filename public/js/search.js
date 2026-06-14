@@ -41,8 +41,8 @@
         fetch('/api/plugins').then((r) => r.ok ? r.json() : []),
         fetch('/api/figma').then((r) => r.ok ? r.json() : []),
       ]);
-      (p || []).forEach((x) => INDEX.push({ type: 'Plugin', title: x.name, sub: 'by ' + x.by, href: '/plugins' }));
-      (f || []).forEach((x) => INDEX.push({ type: 'Figma', title: x.name, sub: x.market, href: '/figma' }));
+      (p || []).forEach((x) => INDEX.push({ type: 'Plugin', title: x.name, sub: 'by ' + x.by, href: '/plugins?hl=' + encodeURIComponent(x.name) }));
+      (f || []).forEach((x) => INDEX.push({ type: 'Figma', title: x.name, sub: x.market, href: '/figma?hl=' + encodeURIComponent(x.name) }));
     } catch (e) { /* offline */ }
   }
 

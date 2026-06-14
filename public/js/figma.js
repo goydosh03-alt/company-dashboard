@@ -12,7 +12,23 @@
     b.classList.add('active'); market = b.dataset.market; render();
   }));
 
-  async function load() { try { const r = await fetch('/api/figma'); if (!r.ok) return; FIGMA = await r.json(); render(); } catch (e) {} }
+  async function load() { try { const r = await fetch('/api/figma'); if (!r.ok) return; FIGMA = await r.json(); render(); flashFromQuery(); } catch (e) {} }
+
+  function flashFromQuery() {
+    const hl = new URLSearchParams(location.search).get('hl');
+    if (!hl) return;
+    const f = FIGMA.find((x) => x.name === hl);
+    if (f) { setTab(f.market); render(); }
+    for (const c of document.querySelectorAll('#figmaGrid .fcard')) {
+      const h = c.querySelector('h4');
+      if (h && h.textContent.trim() === hl) {
+        c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1700);
+        break;
+      }
+    }
+    history.replaceState(null, '', location.pathname);
+  }
 
   function render() {
     const grid = $('figmaGrid');
