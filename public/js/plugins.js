@@ -6,6 +6,14 @@
   let pickedFile = null, editId = null, menuId = null, reupId = null;
   const PLUGINS = {};
 
+  // ---- custom "Uploaded by" dropdown ----
+  const ddRoot = $('upBy');
+  window.ddToggle = function (e) { e.stopPropagation(); ddRoot.classList.toggle('open'); };
+  window.ddPick = function (el) { setUploader(el.textContent.trim()); ddRoot.classList.remove('open'); };
+  function setUploader(name) { ddRoot.dataset.value = name; const l = ddRoot.querySelector('.dd-label'); if (l) l.textContent = name; }
+  function getUploader() { return (ddRoot.dataset.value || '').trim(); }
+  document.addEventListener('click', () => { if (ddRoot) ddRoot.classList.remove('open'); });
+
   window.openUpload = function () { editId = null; $('modalTitle').textContent = 'Upload a plugin'; resetFields(); $('uploadOverlay').classList.add('open'); };
   window.closeUpload = function () { $('uploadOverlay').classList.remove('open'); };
 
@@ -36,17 +44,40 @@
     if (id) PLUGINS[id] = { name, by, filename, url };
   }
 
-  async function loadPlugins() {
-    try {
-      const r = await fetch('/api/plugins'); if (!r.ok) return;
-      const arr = await r.json();
-      document.querySelectorAll('.dyn').forEach((e) => e.remove());
-      for (const k in PLUGINS) delete PLUGINS[k];
-      arr.forEach((p) => insertPlugin(p.name, p.by, p.url, p.filename, p.id));
-    } catch (e) { /* offline */ }
+  function updateEmpty() {
+    const grid = $('pluginGrid'); if (grid) { const e = $('pluginEmpty'); if (e) e.style.display = grid.querySelector('.pcard') ? 'none' : 'block'; }
+    const list = $('pluginList'); if (list) { const e = $('pluginListEmpty'); if (e) e.style.display = list.querySelector('.prow') ? 'none' : 'block'; }
   }
 
-  window.openMenu = function (e, id) { e.stopPropagation(); menuId = id; ctx.style.left = Math.min(e.clientX, window.innerWidth - 190) + 'px'; ctx.style.top = e.clientY + 'px'; ctx.classList.add('open'); };
+  async function loadPlugins() {
+    try {
+      const r = await fetch('/api/plugins');
+      if (r.ok) {
+        const arr = await r.json();
+        document.querySelectorAll('.dyn').forEach((e) => e.remove());
+        for (const k in PLUGINS) delete PLUGINS[k];
+        arr.forEach((p) => insertPlugin(p.name, p.by, p.url, p.filename, p.id));
+      }
+    } catch (e) { /* offline */ }
+    updateEmpty();
+  }
+
+  window.filterPlugins = function (q) {
+    q = (q || '').toLowerCase();
+    document.querySelectorAll('#pluginGrid .pcard').forEach((c) => {
+      const h = c.querySelector('h4'); const t = h ? h.textContent.toLowerCase() : '';
+      c.style.display = t.includes(q) ? '' : 'none';
+    });
+  };
+
+  // 3-dots menu opens to the LEFT of the click
+  window.openMenu = function (e, id) {
+    e.stopPropagation(); menuId = id;
+    const w = 180;
+    ctx.style.left = Math.max(8, e.clientX - w) + 'px';
+    ctx.style.top = e.clientY + 'px';
+    ctx.classList.add('open');
+  };
   document.addEventListener('click', () => { if (ctx) ctx.classList.remove('open'); });
   window.menuEdit = function () { openEdit(menuId); };
   window.menuReupload = function () { reupId = menuId; reFile.click(); };
@@ -55,7 +86,7 @@
   function openEdit(id) {
     const p = PLUGINS[id]; if (!p) return;
     editId = id; $('modalTitle').textContent = 'Edit plugin'; $('upName').value = p.name;
-    const sel = $('upBy'); if (![...sel.options].some((o) => o.value === p.by)) sel.add(new Option(p.by, p.by)); sel.value = p.by;
+    setUploader(p.by);
     upDrop.classList.remove('has-file'); $('upDropTitle').textContent = 'Drop a new .zip (optional)'; $('upDropHint').textContent = 'Leave empty to keep current file';
     pickedFile = null; upFile.value = ''; $('uploadOverlay').classList.add('open');
   }
@@ -81,14 +112,14 @@
   }
 
   function resetFields() {
-    pickedFile = null; upFile.value = ''; $('upName').value = ''; $('upBy').value = $('upBy').options[0].value;
+    pickedFile = null; upFile.value = ''; $('upName').value = ''; setUploader('Oleksandr Hoidosh');
     upDrop.classList.remove('has-file'); $('upDropTitle').textContent = 'Drop a .zip or click to browse'; $('upDropHint').textContent = 'Plugin archive (.zip)';
   }
   window.resetForm = function () { editId = null; $('modalTitle').textContent = 'Upload a plugin'; resetFields(); window.closeUpload(); };
 
   window.submitUpload = async function () {
     const name = $('upName').value.trim();
-    const by = $('upBy').value.trim() || 'Anonymous';
+    const by = getUploader() || 'Anonymous';
     if (!name) { alert('Add a name'); return; }
     if (editId) {
       try {

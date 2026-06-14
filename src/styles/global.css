@@ -256,6 +256,24 @@
   .mk-Bangladesh{background:linear-gradient(135deg,#1a9d57,#4fd08a)}
   .mk-Africa{background:linear-gradient(135deg,#e08a1e,#f0b441)}
 
+  /* custom dropdown */
+  .dd{position:relative}
+  .dd-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--border-strong);border-radius:9px;padding:9px 11px;font-family:inherit;font-size:13px;background:#fff;color:var(--text);cursor:pointer}
+  .dd-btn:hover{border-color:var(--accent)}
+  .dd-btn .material-symbols-outlined{font-size:18px;color:var(--text-3)}
+  .dd-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:11px;box-shadow:0 10px 30px rgba(0,0,0,.14);padding:5px;z-index:70;display:none;max-height:220px;overflow-y:auto}
+  .dd.open .dd-menu{display:block}
+  .dd-opt{padding:9px 11px;border-radius:7px;font-size:13px;cursor:pointer}
+  .dd-opt:hover{background:var(--accent-soft);color:var(--accent)}
+
+  /* plugin search row */
+  .search-row{display:flex;align-items:center;gap:9px;background:#f6f7f9;border:1px solid var(--border);border-radius:10px;padding:9px 13px;margin-bottom:18px;color:var(--text-3)}
+  .search-row input{flex:1;border:none;outline:none;background:transparent;font-family:inherit;font-size:13.5px;color:var(--text)}
+  .search-row .material-symbols-outlined{font-size:20px}
+
+  /* empty states */
+  .empty-row{padding:22px;text-align:center;color:var(--text-3);font-size:13px}
+
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}
     .brand b,.brand small,.m-item .txt,.m-item .ext,.m-label,.m-user .meta,.m-user>.material-symbols-outlined{display:none}

@@ -1,19 +1,10 @@
 <div class="page-head">
-            <div><h2>Plugins</h2><p>Team tools. Upload a .zip, others browse and download.</p></div>
-            <button class="up-btn" onclick="openUpload()"><span class="material-symbols-outlined">upload</span> Upload plugin</button>
-          </div>
-          <div class="toolbar">
-            <button class="chip-btn active">All</button>
-            <button class="chip-btn">Tokens</button>
-            <button class="chip-btn">Components</button>
-            <button class="chip-btn">Assets</button>
-            <button class="chip-btn">Utility</button>
-          </div>
-          <div class="pgrid" id="pluginGrid">
-            <div class="pcard"><div class="top"><div class="ic c-violet"><span class="material-symbols-outlined">tune</span></div><div><h4>Style Builder</h4><span class="cat">Tokens</span></div></div><p>Exports Figma Variables and Styles into tokens.json for the design system pipeline.</p><div class="foot"><div class="by"><span class="av" style="background:#e5484d">S</span>Sandora · v1.2.0</div><a class="sbtn"><span class="material-symbols-outlined">play_circle</span> Demo</a><a class="sbtn solid"><span class="material-symbols-outlined">download</span> Download</a></div></div>
-            <div class="pcard"><div class="top"><div class="ic c-blue"><span class="material-symbols-outlined">colorize</span></div><div><h4>Tokens Studio</h4><span class="cat">Tokens</span></div></div><p>Manage and sync design tokens between Figma and code, with theming support.</p><div class="foot"><div class="by"><span class="av" style="background:#3b6cf6">M</span>Max · v3.1</div><a class="sbtn"><span class="material-symbols-outlined">play_circle</span> Demo</a><a class="sbtn solid"><span class="material-symbols-outlined">download</span> Download</a></div></div>
-            <div class="pcard"><div class="top"><div class="ic c-green"><span class="material-symbols-outlined">content_copy</span></div><div><h4>Component Inspector</h4><span class="cat">Components</span></div></div><p>Quickly check component specs, props and token usage directly in Figma.</p><div class="foot"><div class="by"><span class="av" style="background:#1a9d57">O</span>Olia · v0.9</div><a class="sbtn"><span class="material-symbols-outlined">play_circle</span> Demo</a><a class="sbtn solid"><span class="material-symbols-outlined">download</span> Download</a></div></div>
-            <div class="pcard"><div class="top"><div class="ic c-amber"><span class="material-symbols-outlined">auto_fix_high</span></div><div><h4>Icon Manager</h4><span class="cat">Assets</span></div></div><p>Synchronize the icon set across files and export to the assets pipeline.</p><div class="foot"><div class="by"><span class="av" style="background:#e08a1e">D</span>Denis · v2.0</div><a class="sbtn"><span class="material-symbols-outlined">play_circle</span> Demo</a><a class="sbtn solid"><span class="material-symbols-outlined">download</span> Download</a></div></div>
-            <div class="pcard"><div class="top"><div class="ic c-red"><span class="material-symbols-outlined">grid_view</span></div><div><h4>Layout Grids</h4><span class="cat">Utility</span></div></div><p>Apply and audit consistent layout grids and spacing across frames.</p><div class="foot"><div class="by"><span class="av" style="background:#e5484d">S</span>Sandora · v1.0</div><a class="sbtn"><span class="material-symbols-outlined">play_circle</span> Demo</a><a class="sbtn solid"><span class="material-symbols-outlined">download</span> Download</a></div></div>
-            <div class="pcard"><div class="top"><div class="ic c-blue"><span class="material-symbols-outlined">contrast</span></div><div><h4>Contrast Checker</h4><span class="cat">Utility</span></div></div><p>Validate color contrast against WCAG AA/AAA right inside the canvas.</p><div class="foot"><div class="by"><span class="av" style="background:#3b6cf6">M</span>Max · v1.4</div><a class="sbtn"><span class="material-symbols-outlined">play_circle</span> Demo</a><a class="sbtn solid"><span class="material-symbols-outlined">download</span> Download</a></div></div>
-          </div>
+  <div><h2>Plugins</h2><p>Team tools. Upload a .zip, others browse and download.</p></div>
+  <button class="up-btn" onclick="openUpload()"><span class="material-symbols-outlined">upload</span> Upload plugin</button>
+</div>
+<div class="search-row">
+  <span class="material-symbols-outlined">search</span>
+  <input id="pluginSearch" placeholder="Search plugins by name…" oninput="filterPlugins(this.value)">
+</div>
+<div class="pgrid" id="pluginGrid"></div>
+<div class="empty" id="pluginEmpty" style="display:none">No plugins yet — click “Upload plugin”.</div>

@@ -11,13 +11,16 @@
       </div>
       <div class="field"><label>Plugin name</label><input id="upName" placeholder="e.g. Style Builder"></div>
       <div class="field"><label>Uploaded by</label>
-        <select id="upBy">
-          <option value="Oleksandr Hoidosh">Oleksandr Hoidosh</option>
-          <option value="Diana Hurska">Diana Hurska</option>
-          <option value="Aleksandr Tsarenko">Aleksandr Tsarenko</option>
-          <option value="Kateryna Yefemenko">Kateryna Yefemenko</option>
-          <option value="Pavlo Semenishin">Pavlo Semenishin</option>
-        </select>
+        <div class="dd" id="upBy" data-value="Oleksandr Hoidosh">
+          <button type="button" class="dd-btn" onclick="ddToggle(event)"><span class="dd-label">Oleksandr Hoidosh</span><span class="material-symbols-outlined">unfold_more</span></button>
+          <div class="dd-menu">
+            <div class="dd-opt" onclick="ddPick(this)">Oleksandr Hoidosh</div>
+            <div class="dd-opt" onclick="ddPick(this)">Diana Hurska</div>
+            <div class="dd-opt" onclick="ddPick(this)">Aleksandr Tsarenko</div>
+            <div class="dd-opt" onclick="ddPick(this)">Kateryna Yefemenko</div>
+            <div class="dd-opt" onclick="ddPick(this)">Pavlo Semenishin</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="mf">
