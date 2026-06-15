@@ -1,12 +1,46 @@
-<div class="page-head"><div><h2>Components</h2><p>Preview + spec for each UI element. Live versions come later.</p></div></div>
-          <div class="toolbar">
-            <button class="chip-btn active">All</button><button class="chip-btn">Buttons</button><button class="chip-btn">Inputs</button><button class="chip-btn">Cards</button><button class="chip-btn">Navigation</button>
-          </div>
-          <div class="cgrid">
-            <div class="ccard"><div class="preview"><span class="material-symbols-outlined">smart_button</span></div><div class="cinfo"><b>Button</b><span class="status stable">Stable</span></div></div>
-            <div class="ccard"><div class="preview"><span class="material-symbols-outlined">edit_square</span></div><div class="cinfo"><b>Input</b><span class="status stable">Stable</span></div></div>
-            <div class="ccard"><div class="preview"><span class="material-symbols-outlined">crop_square</span></div><div class="cinfo"><b>Card</b><span class="status stable">Stable</span></div></div>
-            <div class="ccard"><div class="preview"><span class="material-symbols-outlined">toggle_on</span></div><div class="cinfo"><b>Toggle</b><span class="status beta">Beta</span></div></div>
-            <div class="ccard"><div class="preview"><span class="material-symbols-outlined">tab</span></div><div class="cinfo"><b>Tabs</b><span class="status stable">Stable</span></div></div>
-            <div class="ccard"><div class="preview"><span class="material-symbols-outlined">notifications</span></div><div class="cinfo"><b>Toast</b><span class="status beta">Beta</span></div></div>
-          </div>
+<div class="page-head">
+  <div><h2>Components</h2><p>Live &amp; interactive — built from our tokens. More plug in via the Figma export.</p></div>
+</div>
+
+<div class="sec-title"><h3>Button</h3><span class="status stable">Stable</span></div>
+
+<div class="pg">
+  <div class="pg-stage"><div id="btnPreview"></div></div>
+  <div class="pg-controls">
+    <div class="ctl"><label>Variant</label>
+      <div class="seg" data-ctl="variant">
+        <button class="active" data-v="primary">Primary</button>
+        <button data-v="ghost">Ghost</button>
+        <button data-v="danger">Danger</button>
+      </div>
+    </div>
+    <div class="ctl"><label>Size</label>
+      <div class="seg" data-ctl="size">
+        <button data-v="sm">SM</button>
+        <button class="active" data-v="md">MD</button>
+        <button data-v="lg">LG</button>
+      </div>
+    </div>
+    <div class="ctl"><label>Options</label>
+      <div class="seg-toggles">
+        <button class="tg" data-ctl="icon"><span class="material-symbols-outlined">add</span> Leading icon</button>
+        <button class="tg" data-ctl="disabled"><span class="material-symbols-outlined">block</span> Disabled</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-title" style="margin-top:24px"><h3>All states</h3></div>
+<div class="states-grid">
+  <div class="st-cell"><span>Default</span><button class="btn btn-primary">Button</button></div>
+  <div class="st-cell"><span>Hover / focus — try it</span><button class="btn btn-primary">Button</button></div>
+  <div class="st-cell"><span>Disabled</span><button class="btn btn-primary" disabled>Button</button></div>
+  <div class="st-cell"><span>Ghost</span><button class="btn btn-ghost">Button</button></div>
+  <div class="st-cell"><span>Danger</span><button class="btn btn-danger">Button</button></div>
+  <div class="st-cell"><span>With icon</span><button class="btn btn-primary"><span class="material-symbols-outlined">download</span> Button</button></div>
+</div>
+
+<div class="sec-title" style="margin-top:24px"><h3>Code</h3></div>
+<div class="code-box"><button class="copy-btn" onclick="copyBtnCode()"><span class="material-symbols-outlined">content_copy</span> Copy</button><pre id="btnCode"></pre></div>
+
+<div class="cs-note"><span class="material-symbols-outlined">extension</span> Input, Card, Tabs and the rest plug in automatically once exported from Figma → <b>components.json</b> (the plugin step).</div>
