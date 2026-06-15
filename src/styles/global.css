@@ -21,7 +21,8 @@
 
   /* L1 menu */
   .menu{width:212px;flex-shrink:0;background:var(--menu-bg);box-shadow:none;display:flex;flex-direction:column;padding:13px 11px;gap:2px}
-  .brand{display:flex;align-items:center;gap:10px;padding:4px 8px 12px}
+  .brand{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:6px 8px 14px;text-decoration:none}
+  .brand-logo{height:20px;width:auto;display:block}
   .brand .logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#e5484d,#f0813a);display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px}
   .brand b{font-size:14.5px;font-weight:650}
   .brand small{display:block;color:var(--text-3);font-size:11px;font-weight:500}
