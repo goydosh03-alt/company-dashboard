@@ -361,6 +361,19 @@
   .cs-note .material-symbols-outlined{color:var(--accent)}
   .cs-note b{color:var(--text)}
 
+  /* tokens page */
+  .content section{scroll-margin-top:72px}
+  .tk-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px}
+  #tk-type,#tk-spacing,#tk-radius,#tk-shadows,#tk-motion,#tk-breakpoints,#tk-icons{margin-top:26px}
+  .space-scale{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .space-row{display:flex;align-items:center;gap:14px;padding:11px 15px;border-bottom:1px solid var(--border)}
+  .space-row:last-child{border-bottom:none}
+  .space-name{font-size:13px;font-weight:600;width:150px;flex-shrink:0}
+  .space-bar{height:14px;background:var(--accent);border-radius:3px;flex-shrink:0}
+  .space-val{margin-left:auto;font-size:12.5px;color:var(--text-3);font-family:ui-monospace,Menlo,monospace}
+  .icon-grid{display:flex;flex-wrap:wrap;gap:10px}
+  .icon-grid .material-symbols-outlined{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--border);border-radius:11px;background:#fff;font-size:22px;color:var(--text-2)}
+
   @media(max-width:1040px){
     .menu{width:60px;padding:13px 8px}
     .brand b,.brand small,.m-item .txt,.m-item .ext,.m-label,.m-user .meta,.m-user>.material-symbols-outlined{display:none}

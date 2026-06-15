@@ -2,13 +2,17 @@
 import Shell from '../layouts/Shell.astro';
 import content from '../fragments/tokens.html?raw';
 const overview = [
-  { icon: 'format_color_fill', label: 'Colors', active: true },
-  { icon: 'text_fields', label: 'Typography' },
-  { icon: 'rounded_corner', label: 'Radius' },
-  { icon: 'gradient', label: 'Shadows' },
-  { icon: 'space_bar', label: 'Spacing' },
+  { icon: 'format_color_fill', label: 'Color', scroll: '#tk-color', active: true },
+  { icon: 'text_fields', label: 'Typography', scroll: '#tk-type' },
+  { icon: 'space_bar', label: 'Spacing', scroll: '#tk-spacing' },
+  { icon: 'rounded_corner', label: 'Radius', scroll: '#tk-radius' },
+  { icon: 'gradient', label: 'Shadows', scroll: '#tk-shadows' },
+  { icon: 'animation', label: 'Motion', scroll: '#tk-motion' },
+  { icon: 'devices', label: 'Breakpoints', scroll: '#tk-breakpoints' },
+  { icon: 'interests', label: 'Iconography', scroll: '#tk-icons' },
 ];
 ---
 <Shell active="Tokens" title="Tokens" crumb="/ Tokens" overview={overview}>
   <Fragment set:html={content} />
+  <script is:inline src="/js/tokens.js"></script>
 </Shell>
