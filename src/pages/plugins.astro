@@ -5,6 +5,13 @@ import uploadModal from '../fragments/_uploadmodal.html?raw';
 import ctxMenu from '../fragments/_ctxmenu.html?raw';
 const overview = [
   { icon: 'apps', label: 'All plugins', active: true },
+  { divider: 'Categories' },
+  { icon: 'palette', label: 'Styles' },
+  { icon: 'tune', label: 'Variables' },
+  { icon: 'difference', label: 'Comparison' },
+  { icon: 'text_fields', label: 'Text' },
+  { icon: 'insights', label: 'Analysis' },
+  { icon: 'folder', label: 'Resources' },
 ];
 ---
 <Shell active="Plugins" title="Plugins" crumb="/ Plugins" overview={overview}>
