@@ -106,12 +106,23 @@
   }
 
   // category tabs in the sidebar
+  const CAT_META = {
+    all: { t: 'All plugins', d: 'Team tools — upload a .zip, others browse and download.' },
+    Styles: { t: 'Styles', d: 'Plugins for managing color, type and effect styles.' },
+    Variables: { t: 'Variables', d: 'Plugins for Figma variables and design tokens.' },
+    Comparison: { t: 'Comparison', d: 'Plugins for diffing and comparing versions.' },
+    Text: { t: 'Text', d: 'Plugins for content, copy and text utilities.' },
+    Analysis: { t: 'Analysis', d: 'Plugins for audits, accessibility and metrics.' },
+    Resources: { t: 'Resources', d: 'Plugins for assets, icons and exports.' },
+  };
   document.querySelectorAll('.sub .s-item[data-cat]').forEach((it) => it.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelectorAll('.sub .s-item[data-cat]').forEach((x) => x.classList.toggle('active', x === it));
     currentCat = it.dataset.cat; applyFilter();
-    const crumb = $('pageCrumb');
-    if (crumb) crumb.textContent = '/ ' + (currentCat === 'all' ? 'All plugins' : currentCat);
+    const m = CAT_META[currentCat] || CAT_META.all;
+    if ($('phTitle')) $('phTitle').textContent = m.t;
+    if ($('phDesc')) $('phDesc').textContent = m.d;
+    if ($('pageCrumb')) $('pageCrumb').textContent = '/ ' + m.t;
   }));
 
   async function loadPlugins() {

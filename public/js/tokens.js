@@ -1,13 +1,29 @@
 (function () {
   const sections = [...document.querySelectorAll('.tk-section')];
   if (!sections.length) return;
+
+  const TK = {
+    'tk-color': { t: 'Color', d: 'Brand primitives and the semantic roles that map to them.' },
+    'tk-type': { t: 'Typography', d: 'The type scale — sizes, weights and line-heights.' },
+    'tk-spacing': { t: 'Spacing', d: 'A 4px base scale for padding, gaps and margins.' },
+    'tk-radius': { t: 'Radius', d: 'Corner radii from subtle to fully rounded.' },
+    'tk-shadows': { t: 'Shadows · Elevation', d: 'Elevation levels for cards, popovers and modals.' },
+    'tk-motion': { t: 'Motion', d: 'Durations and easing curves for transitions.' },
+    'tk-breakpoints': { t: 'Breakpoints', d: 'Min-width breakpoints used across layouts.' },
+    'tk-icons': { t: 'Iconography', d: 'Material Symbols — sizes, weight and usage.' },
+  };
+
   const links = document.querySelectorAll('.sub .s-item[data-scroll]');
-  const crumb = document.getElementById('pageCrumb');
+  const $ = (id) => document.getElementById(id);
 
   function show(sel) {
-    sections.forEach((s) => s.classList.toggle('active', '#' + s.id === sel));
-    const t = document.querySelector(sel);
-    if (t && crumb) { const h = t.querySelector('.sec-title h3'); crumb.textContent = '/ ' + (h ? h.textContent.trim() : ''); }
+    const id = sel.replace('#', '');
+    sections.forEach((s) => s.classList.toggle('active', s.id === id));
+    const m = TK[id]; if (m) {
+      if ($('phTitle')) $('phTitle').textContent = m.t;
+      if ($('phDesc')) $('phDesc').textContent = m.d;
+      if ($('pageCrumb')) $('pageCrumb').textContent = '/ ' + m.t;
+    }
     const pm = document.querySelector('.panel-main'); if (pm) pm.scrollTop = 0;
   }
 
@@ -18,6 +34,6 @@
     show(a.dataset.scroll);
   }));
 
-  window.openSync = () => document.getElementById('syncOverlay').classList.add('open');
-  window.closeSync = () => document.getElementById('syncOverlay').classList.remove('open');
+  window.openSync = () => $('syncOverlay').classList.add('open');
+  window.closeSync = () => $('syncOverlay').classList.remove('open');
 })();
