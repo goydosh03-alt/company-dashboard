@@ -110,6 +110,8 @@
     e.preventDefault();
     document.querySelectorAll('.sub .s-item[data-cat]').forEach((x) => x.classList.toggle('active', x === it));
     currentCat = it.dataset.cat; applyFilter();
+    const crumb = $('pageCrumb');
+    if (crumb) crumb.textContent = '/ ' + (currentCat === 'all' ? 'All plugins' : currentCat);
   }));
 
   async function loadPlugins() {

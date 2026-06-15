@@ -362,9 +362,14 @@
   .cs-note b{color:var(--text)}
 
   /* tokens page */
-  .content section{scroll-margin-top:72px}
+  .tk-section{display:none}
+  .tk-section.active{display:block}
   .tk-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px}
-  #tk-type,#tk-spacing,#tk-radius,#tk-shadows,#tk-motion,#tk-breakpoints,#tk-icons{margin-top:26px}
+  .tk-desc{color:var(--text-2);font-size:13.5px;margin-bottom:13px}
+  .motion-demo{height:46px;border:1px solid var(--border);border-radius:11px;display:flex;align-items:center;padding:0 14px;overflow:hidden}
+  .motion-dot{width:18px;height:18px;border-radius:50%;background:var(--accent);animation:slide 1.8s cubic-bezier(.2,0,0,1) infinite alternate}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(60vw)}}
+  .icon-sizes{display:flex;align-items:flex-end;gap:18px;color:var(--text-2)}
   .space-scale{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden}
   .space-row{display:flex;align-items:center;gap:14px;padding:11px 15px;border-bottom:1px solid var(--border)}
   .space-row:last-child{border-bottom:none}
