@@ -21,7 +21,7 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
 
     <!-- L1 GENERAL MENU -->
     <nav class="menu">
-      <a class="brand" href="/"><img src="/logo/junoo-mark.png" alt="junoo.digital" class="brand-logo" /><div><b>junoo.digital</b><small>Storybook</small></div></a>
+      <a class="brand" href="/"><img src="/logo/junoo-mark.png" alt="junoo.digital" class="brand-logo" /></a>
 
       <a class={"m-item" + (active === 'Home' ? ' active' : '')} href="/"><span class="material-symbols-outlined">home</span> <span class="txt">Home</span></a>
 
@@ -46,7 +46,7 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
         <div>
           {overview.map((it) => it.divider
             ? <div class="s-label">{it.divider}</div>
-            : <a class={"s-item" + (it.active ? ' active' : '')} data-market={it.market}>{it.flag ? <span class="flag">{it.flag}</span> : <span class="material-symbols-outlined">{it.icon}</span>} {it.label} {it.count != null && <span class="count">{it.count}</span>}</a>
+            : <a class={"s-item" + (it.active ? ' active' : '')} data-market={it.market} data-cat={it.cat}>{it.flag ? <span class="flag">{it.flag}</span> : <span class="material-symbols-outlined">{it.icon}</span>} {it.label} {it.count != null && <span class="count">{it.count}</span>}</a>
           )}
         </div>
       </aside>

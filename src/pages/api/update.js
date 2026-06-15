@@ -24,6 +24,7 @@ export async function POST({ request }) {
     if (url.searchParams.get('name')) meta.name = url.searchParams.get('name');
     if (url.searchParams.get('by')) meta.by = url.searchParams.get('by');
     if (url.searchParams.has('description')) meta.description = url.searchParams.get('description');
+    if (url.searchParams.get('category')) meta.category = url.searchParams.get('category');
 
     const buffer = Buffer.from(await request.arrayBuffer());
     if (buffer.length > 0) {
