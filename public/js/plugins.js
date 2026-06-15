@@ -114,7 +114,7 @@
 
   async function loadPlugins() {
     try {
-      const r = await fetch('/api/plugins');
+      const r = await fetch('/api/plugins', { cache: 'no-store' });
       if (r.ok) {
         const arr = await r.json();
         document.querySelectorAll('.dyn').forEach((e) => e.remove());
@@ -207,4 +207,7 @@
   renderSeeds();
   if (document.readyState !== 'loading') loadPlugins();
   else document.addEventListener('DOMContentLoaded', loadPlugins);
+  // auto-refresh when returning to the tab
+  window.addEventListener('focus', () => loadPlugins());
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) loadPlugins(); });
 })();

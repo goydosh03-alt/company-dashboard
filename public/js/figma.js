@@ -12,7 +12,7 @@
     setTab(b.dataset.market); render();
   }));
 
-  async function load() { try { const r = await fetch('/api/figma'); if (!r.ok) return; FIGMA = await r.json(); render(); flashFromQuery(); } catch (e) {} }
+  async function load() { try { const r = await fetch('/api/figma', { cache: 'no-store' }); if (!r.ok) return; FIGMA = await r.json(); render(); flashFromQuery(); } catch (e) {} }
 
   function flashFromQuery() {
     const hl = new URLSearchParams(location.search).get('hl');

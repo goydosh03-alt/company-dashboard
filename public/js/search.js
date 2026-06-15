@@ -38,8 +38,8 @@
     if (loaded) return; loaded = true;
     try {
       const [p, f] = await Promise.all([
-        fetch('/api/plugins').then((r) => r.ok ? r.json() : []),
-        fetch('/api/figma').then((r) => r.ok ? r.json() : []),
+        fetch('/api/plugins', { cache: 'no-store' }).then((r) => r.ok ? r.json() : []),
+        fetch('/api/figma', { cache: 'no-store' }).then((r) => r.ok ? r.json() : []),
       ]);
       (p || []).forEach((x) => INDEX.push({ type: 'Plugin', title: x.name, sub: 'by ' + x.by, href: '/plugins?hl=' + encodeURIComponent(x.name) }));
       (f || []).forEach((x) => INDEX.push({ type: 'Figma', title: x.name, sub: x.market, href: '/figma?hl=' + encodeURIComponent(x.name) }));
