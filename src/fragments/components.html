@@ -7,6 +7,7 @@
 <section class="comp-section active" id="comp-button">
   <div class="ctabs">
     <button class="ctab active" data-panel="ov">Overview</button>
+    <button class="ctab" data-panel="vr">Variants</button>
     <button class="ctab" data-panel="an">Anatomy</button>
     <button class="ctab" data-panel="st">States</button>
     <button class="ctab" data-panel="sp">Specs</button>
@@ -24,6 +25,7 @@
           <div class="seg" data-ctl="variant">
             <button class="active" data-v="primary">Primary</button>
             <button data-v="ghost">Ghost</button>
+            <button data-v="subtle">Subtle</button>
             <button data-v="danger">Danger</button>
           </div>
         </div>
@@ -44,6 +46,18 @@
     </div>
     <div class="sec-title" style="margin-top:20px"><h3>Code</h3></div>
     <div class="code-box"><button class="copy-btn" onclick="copyBtnCode()"><span class="material-symbols-outlined">content_copy</span> Copy</button><pre id="btnCode"></pre></div>
+  </div>
+
+  <!-- Variants -->
+  <div class="cpanel" data-panel="vr">
+    <p class="tk-desc">Four emphasis levels — pick the lowest that still reads as the right action.</p>
+    <div class="variant-list">
+      <div class="variant-row"><div class="variant-demo"><button class="btn btn-primary">Button</button></div><div><b>Primary · high</b><p>The single main action on a view.</p></div></div>
+      <div class="variant-row"><div class="variant-demo"><button class="btn btn-ghost">Button</button></div><div><b>Secondary · medium</b><p>Supporting actions next to a primary.</p></div></div>
+      <div class="variant-row"><div class="variant-demo"><button class="btn btn-subtle">Button</button></div><div><b>Subtle · low</b><p>Tertiary or inline actions.</p></div></div>
+      <div class="variant-row"><div class="variant-demo"><button class="btn btn-danger">Button</button></div><div><b>Danger</b><p>Destructive actions like delete.</p></div></div>
+    </div>
+    <div class="banner" style="margin-top:14px"><span class="material-symbols-outlined">straighten</span><span>Each variant comes in 3 sizes — <b>SM · MD · LG</b> (try them in Overview).</span></div>
   </div>
 
   <!-- Anatomy -->
