@@ -10,7 +10,7 @@
     { type: 'Page', title: 'Plugins', href: '/plugins' },
     { type: 'Page', title: 'Tokens', href: '/tokens' },
     { type: 'Page', title: 'Components', href: '/components' },
-    { type: 'Page', title: 'Guidelines', href: '/guidelines' },
+    { type: 'Page', title: 'Foundations', href: '/guidelines' },
     { type: 'Page', title: 'Figma', href: '/figma' },
     { type: 'Token', title: 'Colors', href: '/tokens' },
     { type: 'Token', title: 'Typography', href: '/tokens' },
@@ -23,10 +23,11 @@
     { type: 'Component', title: 'Toggle', href: '/components' },
     { type: 'Component', title: 'Tabs', href: '/components' },
     { type: 'Component', title: 'Toast', href: '/components' },
-    { type: 'Guideline', title: 'Foundations', href: '/guidelines' },
-    { type: 'Guideline', title: 'Voice & Tone', href: '/guidelines' },
-    { type: 'Guideline', title: 'Accessibility', href: '/guidelines' },
-    { type: 'Guideline', title: 'Contribution', href: '/guidelines' },
+    { type: 'Foundations', title: 'Principles', href: '/guidelines' },
+    { type: 'Foundations', title: 'Rules', href: '/guidelines' },
+    { type: 'Foundations', title: 'Usage', href: '/guidelines' },
+    { type: 'Foundations', title: 'Accessibility', href: '/guidelines' },
+    { type: 'Foundations', title: 'Contribution', href: '/guidelines' },
   ];
   const ICON = { Page: 'description', Token: 'palette', Component: 'widgets', Guideline: 'menu_book', Plugin: 'extension', Figma: 'design_services' };
 

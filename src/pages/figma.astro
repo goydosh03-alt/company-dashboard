@@ -1,17 +1,17 @@
 ---
 import Shell from '../layouts/Shell.astro';
 import content from '../fragments/figma.html?raw';
-import figmaModal from '../fragments/_figmamodal.html?raw';
 const overview = [
-  { flag: '📱', label: 'Native', market: 'Native', active: true },
-  { flag: '🇰🇿', label: 'Kazakhstan', market: 'Kazakhstan' },
-  { flag: '🇪🇺', label: 'COM', market: 'COM' },
-  { flag: '🇧🇩', label: 'Bangladesh', market: 'Bangladesh' },
-  { flag: '🌍', label: 'Africa', market: 'Africa' },
+  { icon: 'apps', label: 'All files', cat: 'all', active: true },
+  { divider: 'Categories' },
+  { icon: 'dashboard', label: 'Design System', cat: 'Design System' },
+  { icon: 'dark_mode', label: 'Themes', cat: 'Themes' },
+  { icon: 'foundation', label: 'Foundations', cat: 'Foundations' },
+  { icon: 'campaign', label: 'Marketing', cat: 'Marketing' },
+  { icon: 'bug_report', label: 'Testing', cat: 'Testing' },
 ];
 ---
-<Shell active="Figma" title="Figma" crumb="/ Figma" overview={overview}>
+<Shell active="Figma" title="Figma" crumb="/ All files" overview={overview}>
   <Fragment set:html={content} />
-  <Fragment set:html={figmaModal} />
   <script is:inline src="/js/figma.js"></script>
 </Shell>

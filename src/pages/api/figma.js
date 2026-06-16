@@ -28,6 +28,7 @@ export async function POST({ request }) {
     const id = Date.now() + '-' + Math.random().toString(36).slice(2, 7);
     const meta = {
       id, name, link,
+      type: url.searchParams.get('type') || 'Design System',
       market: url.searchParams.get('market') || 'Native',
       description: url.searchParams.get('description') || '',
       date: new Date().toISOString(),

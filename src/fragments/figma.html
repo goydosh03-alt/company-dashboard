@@ -1,6 +1,39 @@
 <div class="page-head">
-  <div><h2>Figma files</h2><p>Project files per market. Quick-open or add a new one.</p></div>
+  <div><h2 id="phTitle">All files</h2><p id="phDesc">Project files, grouped by type. Open quickly or add a new one.</p></div>
   <button class="up-btn" onclick="openFigma()"><span class="material-symbols-outlined">add</span> Add file</button>
 </div>
 <div class="fgrid" id="figmaGrid"></div>
-<div class="empty" id="figmaEmpty" style="display:none">No files for this market yet — click “Add file”.</div>
+<div class="empty" id="figmaEmpty" style="display:none">No files here yet — click “Add file”.</div>
+
+<!-- context menu -->
+<div class="ctx-menu" id="figCtx">
+  <button onclick="figEdit()"><span class="material-symbols-outlined">edit</span> Edit</button>
+  <hr>
+  <button class="danger" onclick="figDelete()"><span class="material-symbols-outlined">delete</span> Delete</button>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="overlay" id="figmaOverlay">
+  <div class="modal">
+    <div class="mh"><b id="figModalTitle">Add Figma file</b><span class="material-symbols-outlined x" onclick="closeFigma()">close</span></div>
+    <div class="mb">
+      <div class="field"><label>File name</label><input id="fgName" placeholder="e.g. Design System · Core"></div>
+      <div class="field"><label>Type</label>
+        <select id="fgType">
+          <option>Design System</option><option>Themes</option><option>Foundations</option><option>Marketing</option><option>Testing</option>
+        </select>
+      </div>
+      <div class="field"><label>Market</label>
+        <select id="fgMarket">
+          <option>Native</option><option>Kazakhstan</option><option>COM</option><option>Bangladesh</option><option>Africa</option>
+        </select>
+      </div>
+      <div class="field"><label>Figma link</label><input id="fgLink" placeholder="https://www.figma.com/file/..."></div>
+      <div class="field"><label>Short description (optional)</label><input id="fgDesc" placeholder="What's inside"></div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost" onclick="closeFigma()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitFigma()"><span class="material-symbols-outlined">save</span> Save file</button>
+    </div>
+  </div>
+</div>

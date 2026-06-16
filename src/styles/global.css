@@ -263,6 +263,13 @@
   .mk-COM{background:linear-gradient(135deg,#16181d,#3a3f4a)}
   .mk-Bangladesh{background:linear-gradient(135deg,#1a9d57,#4fd08a)}
   .mk-Africa{background:linear-gradient(135deg,#e08a1e,#f0b441)}
+  /* figma cover by file type */
+  .fcover .material-symbols-outlined{font-size:30px;color:rgba(255,255,255,.92)}
+  .fc-design-system{background:linear-gradient(135deg,#e5484d,#f0813a)}
+  .fc-themes{background:linear-gradient(135deg,#7c5cf6,#a78bfa)}
+  .fc-foundations{background:linear-gradient(135deg,#3b6cf6,#5ea0ff)}
+  .fc-marketing{background:linear-gradient(135deg,#e08a1e,#f0b441)}
+  .fc-testing{background:linear-gradient(135deg,#1a9d57,#4fd08a)}
 
   /* custom dropdown */
   .dd{position:relative}
