@@ -2,12 +2,14 @@
 import Shell from '../layouts/Shell.astro';
 import content from '../fragments/guidelines.html?raw';
 const overview = [
-  { icon: 'foundation', label: 'Foundations', active: true },
-  { icon: 'campaign', label: 'Voice & Tone' },
-  { icon: 'accessibility_new', label: 'Accessibility' },
-  { icon: 'volunteer_activism', label: 'Contribution' },
+  { icon: 'foundation', label: 'Principles', scroll: '#gl-principles', active: true },
+  { icon: 'gavel', label: 'Rules', scroll: '#gl-rules' },
+  { icon: 'rule', label: 'Usage', scroll: '#gl-usage' },
+  { icon: 'accessibility_new', label: 'Accessibility', scroll: '#gl-a11y' },
+  { icon: 'volunteer_activism', label: 'Contribution', scroll: '#gl-contribution' },
 ];
 ---
-<Shell active="Guidelines" title="Guidelines" crumb="/ Guidelines" overview={overview}>
+<Shell active="Guidelines" title="Guidelines" crumb="/ Principles" overview={overview}>
   <Fragment set:html={content} />
+  <script is:inline src="/js/guidelines.js"></script>
 </Shell>

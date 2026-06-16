@@ -1,14 +1,79 @@
-<div class="doc">
-            <h2>Foundations</h2>
-            <p class="lead">Principles and rules for the Pin-Up design system. Edited as Markdown via GitHub pull requests.</p>
-            <h3>Principles</h3>
-            <p>Consistency over novelty. Reuse tokens and components before creating new ones. Accessibility is a requirement, not a nice-to-have.</p>
-            <h3>How to contribute</h3>
-            <p>Open a pull request against the guide repository. Markdown files in <b>src/content/guidelines</b> render here automatically after deploy.</p>
-            <div class="doc-list">
-              <a class="doc-link"><span class="material-symbols-outlined">foundation</span><div><b>Foundations</b><span>Grid, spacing, layout principles</span></div></a>
-              <a class="doc-link"><span class="material-symbols-outlined">campaign</span><div><b>Voice &amp; Tone</b><span>How we write across the product</span></div></a>
-              <a class="doc-link"><span class="material-symbols-outlined">accessibility_new</span><div><b>Accessibility</b><span>WCAG AA baseline and checks</span></div></a>
-              <a class="doc-link"><span class="material-symbols-outlined">volunteer_activism</span><div><b>Contribution</b><span>How to propose changes via GitHub</span></div></a>
-            </div>
-          </div>
+<div class="page-head">
+  <div><h2 id="phTitle">Principles</h2><p id="phDesc">The values that guide every design decision in the system.</p></div>
+</div>
+
+<!-- PRINCIPLES -->
+<section class="gl-section active" id="gl-principles">
+  <div class="pr-grid">
+    <div class="pr-card"><div class="ic c-red"><span class="material-symbols-outlined">bolt</span></div><b>Consistency over novelty</b><p>Reuse existing patterns and tokens before inventing new ones.</p></div>
+    <div class="pr-card"><div class="ic c-green"><span class="material-symbols-outlined">accessibility_new</span></div><b>Accessible by default</b><p>WCAG AA is a baseline requirement, not an afterthought.</p></div>
+    <div class="pr-card"><div class="ic c-blue"><span class="material-symbols-outlined">visibility</span></div><b>Clarity first</b><p>Prefer the obvious solution; reduce choices and cognitive load.</p></div>
+    <div class="pr-card"><div class="ic c-violet"><span class="material-symbols-outlined">recycling</span></div><b>Reuse before build</b><p>Compose from components; create new ones only when truly missing.</p></div>
+    <div class="pr-card"><div class="ic c-amber"><span class="material-symbols-outlined">trending_up</span></div><b>Built to scale</b><p>Decisions should hold across markets, themes and growth.</p></div>
+    <div class="pr-card"><div class="ic c-red"><span class="material-symbols-outlined">menu_book</span></div><b>Documented</b><p>If it isn't written here, it isn't a rule yet.</p></div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="gl-section" id="gl-rules">
+  <div class="doc">
+    <p class="lead">Hard rules everyone follows — no exceptions without a documented decision.</p>
+    <div class="rules">
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Use design tokens for every color, size and spacing value.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Hardcode hex, px or one-off shadows in components.</p></div></div>
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Compose screens from existing components.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Rebuild a component that already exists.</p></div></div>
+    </div>
+    <h3>Naming</h3>
+    <p>Tokens: <code>category/role-variant</code> (e.g. <code>color/accent-soft</code>). Components: PascalCase. Files &amp; branches: kebab-case.</p>
+  </div>
+</section>
+
+<!-- USAGE -->
+<section class="gl-section" id="gl-usage">
+  <div class="doc">
+    <p class="lead">How to apply the system day to day.</p>
+    <h3>Reuse vs. create</h3>
+    <p>Start from an existing component. If it's 80% there, extend it with a variant. Create a new component only when the pattern is genuinely new and will be reused.</p>
+    <h3>Exceptions</h3>
+    <p>Edge cases happen. When you must deviate, document why in the pull request so the decision is visible — an undocumented exception is a bug.</p>
+    <div class="doc-list">
+      <a class="doc-link"><span class="material-symbols-outlined">palette</span><div><b>Need a value?</b><span>Pull it from Tokens, not from a screenshot.</span></div></a>
+      <a class="doc-link"><span class="material-symbols-outlined">widgets</span><div><b>Need UI?</b><span>Check Components first.</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESSIBILITY -->
+<section class="gl-section" id="gl-a11y">
+  <div class="doc">
+    <p class="lead">WCAG 2.1 AA is the baseline for everything we ship.</p>
+    <div class="rules">
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Keep text contrast ≥ 4.5:1 (≥ 3:1 for large text).</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Convey meaning with color alone.</p></div></div>
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Provide visible focus states and ≥ 44px touch targets.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Remove outlines without a replacement focus style.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTION -->
+<section class="gl-section" id="gl-contribution">
+  <div class="doc">
+    <p class="lead">Guidelines are Markdown files in the repo — anyone can propose changes.</p>
+    <div class="flow">
+      <span class="flow-step"><span class="material-symbols-outlined">edit</span> Edit Markdown</span>
+      <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
+      <span class="flow-step"><span class="material-symbols-outlined">merge</span> Open a pull request</span>
+      <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
+      <span class="flow-step"><span class="material-symbols-outlined">public</span> Merged → live</span>
+    </div>
+    <h3>What a guideline contains</h3>
+    <p>A short principle or rule, when to apply it, examples, and any exceptions. Keep it concrete and skimmable.</p>
+    <a class="repo-card" href="https://github.com/goydosh03-alt/company-dashboard" target="_blank" rel="noopener">
+      <div class="ic c-red"><span class="material-symbols-outlined">code</span></div>
+      <div class="rc-meta"><b>company-dashboard</b><span>Edit guidelines in /src/content</span></div>
+      <span class="material-symbols-outlined rc-go">open_in_new</span>
+    </a>
+  </div>
+</section>
