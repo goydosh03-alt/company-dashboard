@@ -3,8 +3,8 @@
   if (!sections.length) return;
 
   const GL = {
-    'gl-overview': { t: 'Overview', d: 'Where the system’s thinking lives — principles, accessibility, layout and states.' },
-    'gl-principles': { t: 'Principles', d: 'The values that guide every design decision in the system.' },
+    'gl-about': { t: 'About the system', d: 'What junoo.digital is, what it powers, and what it’s built from.' },
+    'gl-brand': { t: 'Brand', d: 'The mark, brand colors and logo usage.' },
     'gl-a11y': { t: 'Accessibility', d: 'WCAG 2.1 AA baseline for everything we ship.' },
     'gl-layout': { t: 'Layout & Grid', d: 'Regions, grid rhythm and responsive rules shared by all products.' },
     'gl-interaction': { t: 'Interaction & States', d: 'One state model applied across every component.' },

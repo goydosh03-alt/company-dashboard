@@ -1,41 +1,56 @@
 <div class="page-head">
-  <div><h2 id="phTitle">Overview</h2><p id="phDesc">Where the system’s thinking lives — principles, accessibility, layout and states.</p></div>
+  <div><h2 id="phTitle">About the system</h2><p id="phDesc">What junoo.digital is, what it powers, and what it’s built from.</p></div>
 </div>
 
-<!-- OVERVIEW -->
-<section class="gl-section active" id="gl-overview">
+<!-- ABOUT -->
+<section class="gl-section active" id="gl-about">
   <div class="hero" style="margin-bottom:20px">
-    <h2>Foundations of junoo.digital</h2>
-    <p>The shared rules of our design language — applied the same way across every product (Native, COM, KZ and beyond). Foundations sit above tokens and components: they explain how to think and apply, not just what the values are.</p>
+    <h2>The junoo.digital design system</h2>
+    <p>A single source of truth that powers every product and market we ship. It keeps design and code consistent, speeds up delivery, and bakes accessibility in from the start — so teams build once and reuse everywhere.</p>
   </div>
 
-  <div class="tiers">
-    <div class="tier"><span class="tier-tag">Foundations</span><b>How we think</b><span>principles · a11y · layout · states</span></div>
-    <span class="tier-arrow material-symbols-outlined">arrow_forward</span>
-    <div class="tier"><span class="tier-tag">Tokens</span><b>What we use</b><span>color · type · spacing · motion</span></div>
-    <span class="tier-arrow material-symbols-outlined">arrow_forward</span>
-    <div class="tier"><span class="tier-tag">Components</span><b>What we build</b><span>buttons · inputs · cards</span></div>
+  <div class="tk-label">Powers these products</div>
+  <div class="mkt-chips">
+    <span class="mkt-chip">📱 Native</span>
+    <span class="mkt-chip">🇪🇺 COM</span>
+    <span class="mkt-chip">🇰🇿 Kazakhstan</span>
+    <span class="mkt-chip">🇧🇩 Bangladesh</span>
+    <span class="mkt-chip">🌍 Africa</span>
   </div>
 
-  <div class="pr-grid" style="margin-top:6px">
-    <a class="pr-card" data-goto="gl-principles"><div class="ic c-red"><span class="material-symbols-outlined">foundation</span></div><b>Principles</b><p>The values guiding every decision.</p></a>
-    <a class="pr-card" data-goto="gl-a11y"><div class="ic c-green"><span class="material-symbols-outlined">accessibility_new</span></div><b>Accessibility</b><p>WCAG AA baseline for all products.</p></a>
-    <a class="pr-card" data-goto="gl-layout"><div class="ic c-blue"><span class="material-symbols-outlined">grid_view</span></div><b>Layout &amp; Grid</b><p>Regions, grid and responsive rules.</p></a>
-    <a class="pr-card" data-goto="gl-interaction"><div class="ic c-violet"><span class="material-symbols-outlined">touch_app</span></div><b>Interaction &amp; States</b><p>One state model for every component.</p></a>
-    <a class="pr-card" data-goto="gl-content"><div class="ic c-amber"><span class="material-symbols-outlined">edit_note</span></div><b>Content &amp; Voice</b><p>How we write across the product.</p></a>
-    <a class="pr-card" data-goto="gl-contribution"><div class="ic c-red"><span class="material-symbols-outlined">volunteer_activism</span></div><b>Contribution</b><p>Extend the system via GitHub.</p></a>
+  <div class="sec-title" style="margin-top:22px"><h3>What it’s built from</h3></div>
+  <div class="quick">
+    <div class="qcard"><div class="ic c-red"><span class="material-symbols-outlined">foundation</span></div><b>Foundations</b><p>How we think — brand, accessibility, layout, states, content.</p><span class="tag">you are here</span></div>
+    <a class="qcard" data-go="Tokens"><div class="ic c-violet"><span class="material-symbols-outlined">palette</span></div><b>Tokens</b><p>What we use — color, type, spacing, motion.</p><span class="tag">styles</span></a>
+    <a class="qcard" data-go="Components"><div class="ic c-green"><span class="material-symbols-outlined">widgets</span></div><b>Components</b><p>What we build — buttons, inputs, cards.</p><span class="tag">UI</span></a>
+    <a class="qcard" data-go="Plugins"><div class="ic c-amber"><span class="material-symbols-outlined">extension</span></div><b>Plugins</b><p>How the team works — shared Figma tools.</p><span class="tag">tooling</span></a>
+  </div>
+
+  <div class="sec-title" style="margin-top:22px"><h3>Principles</h3></div>
+  <div class="pr-grid">
+    <div class="pr-card"><div class="ic c-red"><span class="material-symbols-outlined">bolt</span></div><b>Consistency over novelty</b><p>Reuse patterns and tokens before inventing new ones.</p></div>
+    <div class="pr-card"><div class="ic c-green"><span class="material-symbols-outlined">accessibility_new</span></div><b>Accessible by default</b><p>WCAG AA is a baseline, not an extra.</p></div>
+    <div class="pr-card"><div class="ic c-blue"><span class="material-symbols-outlined">visibility</span></div><b>Clarity first</b><p>The obvious solution beats the clever one.</p></div>
+    <div class="pr-card"><div class="ic c-amber"><span class="material-symbols-outlined">trending_up</span></div><b>Built to scale</b><p>Holds across markets, themes and growth.</p></div>
   </div>
 </section>
 
-<!-- PRINCIPLES -->
-<section class="gl-section" id="gl-principles">
-  <div class="pr-grid">
-    <div class="pr-card"><div class="ic c-red"><span class="material-symbols-outlined">bolt</span></div><b>Consistency over novelty</b><p>Reuse existing patterns and tokens before inventing new ones.</p></div>
-    <div class="pr-card"><div class="ic c-green"><span class="material-symbols-outlined">accessibility_new</span></div><b>Accessible by default</b><p>WCAG AA is a baseline requirement, not an afterthought.</p></div>
-    <div class="pr-card"><div class="ic c-blue"><span class="material-symbols-outlined">visibility</span></div><b>Clarity first</b><p>Prefer the obvious solution; reduce choices and cognitive load.</p></div>
-    <div class="pr-card"><div class="ic c-violet"><span class="material-symbols-outlined">recycling</span></div><b>Reuse before build</b><p>Compose from components; create new ones only when truly missing.</p></div>
-    <div class="pr-card"><div class="ic c-amber"><span class="material-symbols-outlined">trending_up</span></div><b>Built to scale</b><p>Decisions should hold across markets, themes and growth.</p></div>
-    <div class="pr-card"><div class="ic c-red"><span class="material-symbols-outlined">menu_book</span></div><b>Documented</b><p>If it isn't written here, it isn't a rule yet.</p></div>
+<!-- BRAND -->
+<section class="gl-section" id="gl-brand">
+  <div class="brand-show"><img src="/logo/junoo.png" alt="junoo.digital" /></div>
+  <div class="doc">
+    <h3>The mark</h3>
+    <p>The wordmark <b>júnoo.</b> is the primary logo; the compact <b>jú</b> mark is used in tight spaces (sidebar, favicon). Keep clear space around it and never recolor or distort it.</p>
+    <h3>Brand color</h3>
+  </div>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:#e5484d"></div><b>brand/red</b><span>#e5484d</span></div>
+    <div class="swatch"><div class="chip" style="background:#16181d"></div><b>brand/ink</b><span>#16181d</span></div>
+    <div class="swatch"><div class="chip" style="background:#e2e5ea;border-color:#cdd2da"></div><b>brand/grey</b><span>#e2e5ea</span></div>
+  </div>
+  <div class="rules">
+    <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Use the mark on its own light or dark background variant.</p></div></div>
+    <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Stretch, recolor, add effects or place on busy imagery.</p></div></div>
   </div>
 </section>
 
@@ -51,25 +66,22 @@
     </div>
     <h3>Checklist</h3>
     <div class="doc-list">
-      <a class="doc-link"><span class="material-symbols-outlined">contrast</span><div><b>Contrast</b><span>Verify with the Tokens → Color contrast pairs.</span></div></a>
+      <a class="doc-link" data-go="Tokens"><span class="material-symbols-outlined">contrast</span><div><b>Contrast</b><span>Verify with Tokens → Color contrast pairs.</span></div></a>
       <a class="doc-link"><span class="material-symbols-outlined">keyboard</span><div><b>Keyboard</b><span>Every action reachable & operable without a mouse.</span></div></a>
-      <a class="doc-link"><span class="material-symbols-outlined">screen_reader</span><div><b>Semantics</b><span>Use native elements and labels for screen readers.</span></div></a>
+      <a class="doc-link"><span class="material-symbols-outlined">hearing</span><div><b>Semantics</b><span>Native elements and labels for screen readers.</span></div></a>
     </div>
   </div>
 </section>
 
 <!-- LAYOUT & GRID -->
 <section class="gl-section" id="gl-layout">
-  <div class="doc">
-    <p class="lead">A consistent three-region shell and a 4px rhythm keep every product feeling like one system.</p>
-    <h3>App regions</h3>
-  </div>
+  <div class="doc"><p class="lead">A consistent three-region shell and a 4px rhythm keep every product feeling like one system.</p><h3>App regions</h3></div>
   <div class="bp-screens" style="grid-template-columns:1fr;max-width:420px">
     <div class="screen"><div class="sc-top"></div><div class="sc-body"><div class="sc-side"></div><div class="sc-side" style="width:34px;background:#eef0f3"></div><div class="sc-col"></div></div><span>menu · overview · content</span></div>
   </div>
   <div class="doc" style="margin-top:16px">
     <h3>Rhythm &amp; responsive</h3>
-    <p>Spacing follows the 4px scale (see Tokens → Spacing). Layouts adapt at the standard breakpoints (sm 640 · md 768 · lg 1024 · xl 1280).</p>
+    <p>Spacing follows the 4px scale (Tokens → Spacing). Layouts adapt at sm 640 · md 768 · lg 1024 · xl 1280.</p>
     <div class="rules">
       <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Keep the menu fixed; scroll content inside the white panel.</p></div></div>
       <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Invent new page chrome per product.</p></div></div>
@@ -105,7 +117,7 @@
       <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Use Title Case Everywhere Or ALL CAPS.</p></div></div>
     </div>
     <h3>Tone</h3>
-    <p>Confident and friendly, never clever at the cost of clarity. Short sentences. No jargon the user wouldn't use.</p>
+    <p>Confident and friendly, never clever at the cost of clarity. Short sentences, no jargon the user wouldn't use.</p>
   </div>
 </section>
 

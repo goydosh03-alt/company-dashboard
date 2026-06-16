@@ -440,6 +440,10 @@
   .pr-card p{font-size:12.5px;color:var(--text-2);margin-top:4px}
   a.pr-card{text-decoration:none;color:inherit;cursor:pointer;transition:.15s}
   a.pr-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px);border-color:var(--border-strong)}
+  .mkt-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .mkt-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border-strong);border-radius:20px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--text-2);background:#fff}
+  .brand-show{border:1px solid var(--border);border-radius:14px;background:#fff;display:grid;place-items:center;padding:42px;margin-bottom:18px}
+  .brand-show img{height:42px;width:auto;display:block}
 
   /* component reference (M3-style tabs) */
   .comp-section{display:none}
