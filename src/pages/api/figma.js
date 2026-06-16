@@ -26,11 +26,19 @@ export async function POST({ request }) {
     const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
     const t = token ? { token } : {};
     const id = Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+    let cover = '';
+    const buf = Buffer.from(await request.arrayBuffer());
+    if (buf.length > 0) {
+      const cn = (url.searchParams.get('coverName') || 'cover.png').replace(/[^a-zA-Z0-9._-]/g, '_');
+      const ct = url.searchParams.get('coverType') || 'image/png';
+      const cb = await put(`figma-covers/${id}-${cn}`, buf, { access: 'public', contentType: ct, ...t });
+      cover = cb.url;
+    }
     const meta = {
       id, name, link,
       type: url.searchParams.get('type') || 'Design System',
-      market: url.searchParams.get('market') || 'Native',
       description: url.searchParams.get('description') || '',
+      cover,
       date: new Date().toISOString(),
     };
     await put(`figma/${id}.json`, JSON.stringify(meta), { access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true, ...t });

@@ -23,10 +23,13 @@
           <option>Design System</option><option>Themes</option><option>Foundations</option><option>Marketing</option><option>Testing</option>
         </select>
       </div>
-      <div class="field"><label>Market</label>
-        <select id="fgMarket">
-          <option>Native</option><option>Kazakhstan</option><option>COM</option><option>Bangladesh</option><option>Africa</option>
-        </select>
+      <div class="field"><label>Cover <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+        <div class="drop" id="fgDrop" onclick="document.getElementById('fgCover').click()">
+          <span class="material-symbols-outlined">image</span>
+          <b id="fgDropT">Drop an image or click to browse</b>
+          <span id="fgDropH">PNG / JPG — used as the card cover</span>
+          <input type="file" id="fgCover" accept="image/*" hidden>
+        </div>
       </div>
       <div class="field"><label>Figma link</label><input id="fgLink" placeholder="https://www.figma.com/file/..."></div>
       <div class="field"><label>Short description (optional)</label><input id="fgDesc" placeholder="What's inside"></div>

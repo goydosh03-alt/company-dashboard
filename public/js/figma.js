@@ -10,34 +10,43 @@
     'Marketing': { t: 'Marketing', d: 'Promo, banners and art files.' },
     'Testing': { t: 'Testing', d: 'Sandboxes and experiments.' },
   };
-  const FLAG = { Native: '📱', Kazakhstan: '🇰🇿', COM: '🇪🇺', Bangladesh: '🇧🇩', Africa: '🌍' };
 
-  // demo placeholders (no id → no menu, link '#')
+  const days = (n) => new Date(Date.now() - n * 86400000).toISOString();
   const SEED = [
-    { name: 'Design System · Core', type: 'Design System', market: 'Native', description: 'Components, tokens, patterns', link: '#' },
-    { name: 'Components Library', type: 'Design System', market: 'COM', description: 'All shared components', link: '#' },
-    { name: 'Theme · Light', type: 'Themes', market: 'COM', description: 'Light theme styles', link: '#' },
-    { name: 'Theme · Dark', type: 'Themes', market: 'COM', description: 'Dark theme styles', link: '#' },
-    { name: 'Grid & Layout', type: 'Foundations', market: 'Native', description: 'Spacing, grid, breakpoints', link: '#' },
-    { name: 'Promo Banners', type: 'Marketing', market: 'Kazakhstan', description: 'Campaign banner sources', link: '#' },
-    { name: 'Art / Illustrations', type: 'Marketing', market: 'Africa', description: 'Illustration library', link: '#' },
-    { name: 'Sandbox · For Testing', type: 'Testing', market: 'Native', description: 'Experiments & QA', link: '#' },
+    { name: 'Design System · Core', type: 'Design System', description: 'Components, tokens, patterns', link: '#', date: days(2) },
+    { name: 'Components Library', type: 'Design System', description: 'All shared components', link: '#', date: days(9) },
+    { name: 'Theme · Light', type: 'Themes', description: 'Light theme styles', link: '#', date: days(1) },
+    { name: 'Theme · Dark', type: 'Themes', description: 'Dark theme styles', link: '#', date: days(1) },
+    { name: 'Grid & Layout', type: 'Foundations', description: 'Spacing, grid, breakpoints', link: '#', date: days(14) },
+    { name: 'Promo Banners', type: 'Marketing', description: 'Campaign banner sources', link: '#', date: days(4) },
+    { name: 'Art / Illustrations', type: 'Marketing', description: 'Illustration library', link: '#', date: days(20) },
+    { name: 'Sandbox · For Testing', type: 'Testing', description: 'Experiments & QA', link: '#', date: days(0) },
   ];
 
-  let FILES = [], currentType = 'all', menuId = null, editId = null;
+  let FILES = [], currentType = 'all', menuId = null, editId = null, pickedCover = null;
 
-  function slug(t) { return 'fc-' + (t || 'design system').toLowerCase().replace(/\s+/g, '-'); }
+  const slug = (t) => 'fc-' + (t || 'design system').toLowerCase().replace(/\s+/g, '-');
+  function rel(iso) {
+    if (!iso) return 'recently';
+    const s = (Date.now() - new Date(iso)) / 1000;
+    if (s < 86400) return 'today';
+    const d = Math.round(s / 86400);
+    if (d < 30) return d + 'd ago';
+    return new Date(iso).toLocaleDateString('en', { month: 'short', day: 'numeric' });
+  }
 
   function buildCard(f) {
     const real = f.link && f.link !== '#';
     const dots = f.id ? `<button class="dots" onclick="figMenu(event,'${f.id}')"><span class="material-symbols-outlined">more_horiz</span></button>` : '';
+    const cover = f.cover
+      ? `<div class="fcover" style="background-image:url('${f.cover}');background-size:cover;background-position:center"></div>`
+      : `<div class="fcover ${slug(f.type)}"><span class="material-symbols-outlined">design_services</span></div>`;
     const open = real
-      ? `<a class="sbtn solid" target="_blank" href="${f.link}">Open <span class="material-symbols-outlined">arrow_forward</span></a>`
-      : `<span class="sbtn" style="opacity:.55;cursor:default">Demo</span>`;
+      ? `<a class="sbtn solid fw" target="_blank" href="${f.link}">Open <span class="material-symbols-outlined">arrow_forward</span></a>`
+      : `<span class="sbtn fw" style="opacity:.55;cursor:default">Demo</span>`;
     const el = document.createElement('div'); el.className = 'fcard'; if (f.id) el.dataset.id = f.id;
-    el.innerHTML = `${dots}<div class="fcover ${slug(f.type)}"><span class="material-symbols-outlined">design_services</span></div>
-      <div class="fbody"><h4></h4><div class="fdesc"></div>
-        <div class="ffoot"><span class="fmkt">${FLAG[f.market] || ''} ${f.market || ''}</span>${open}</div></div>`;
+    el.innerHTML = `${dots}${cover}<div class="fbody"><h4></h4><div class="fdesc"></div>
+      <div class="fupdated"><span class="material-symbols-outlined">schedule</span> Updated ${rel(f.updated || f.date)}</div>${open}</div>`;
     el.querySelector('h4').textContent = f.name;
     el.querySelector('.fdesc').textContent = f.description || '';
     return el;
@@ -72,24 +81,34 @@
     render();
   }));
 
-  // add / edit modal
+  // cover picker
+  const fgCover = $('fgCover');
+  fgCover.addEventListener('change', () => {
+    pickedCover = fgCover.files[0] || null;
+    $('fgDrop').classList.toggle('has-file', !!pickedCover);
+    $('fgDropT').textContent = pickedCover ? pickedCover.name : 'Drop an image or click to browse';
+  });
+  function resetCover() { pickedCover = null; fgCover.value = ''; $('fgDrop').classList.remove('has-file'); $('fgDropT').textContent = 'Drop an image or click to browse'; }
+
+  // add / edit
   window.openFigma = function () {
     editId = null; $('figModalTitle').textContent = 'Add Figma file';
     $('fgName').value = ''; $('fgLink').value = ''; $('fgDesc').value = '';
     $('fgType').value = (currentType !== 'all') ? currentType : 'Design System';
-    $('fgMarket').value = 'Native';
+    resetCover();
     $('figmaOverlay').classList.add('open');
   };
   window.closeFigma = function () { $('figmaOverlay').classList.remove('open'); };
 
   window.submitFigma = async function () {
     const name = $('fgName').value.trim(), link = $('fgLink').value.trim();
-    const type = $('fgType').value, market = $('fgMarket').value, description = $('fgDesc').value.trim();
+    const type = $('fgType').value, description = $('fgDesc').value.trim();
     if (!name || !link) { alert('Add a name and a Figma link'); return; }
-    const q = new URLSearchParams({ name, link, type, market, description });
+    const q = new URLSearchParams({ name, link, type, description });
+    if (pickedCover) { q.set('coverName', pickedCover.name); q.set('coverType', pickedCover.type || 'image/png'); }
     const url = editId ? '/api/figma-update?id=' + encodeURIComponent(editId) + '&' + q : '/api/figma?' + q;
     try {
-      const r = await fetch(url, { method: 'POST' });
+      const r = await fetch(url, { method: 'POST', body: pickedCover || '' });
       if (!r.ok) { let d = ''; try { d = (await r.json()).error || ''; } catch (e) {} throw new Error('HTTP ' + r.status + (d ? ' — ' + d : '')); }
       await load();
     } catch (err) { alert('Save failed: ' + err.message); }
@@ -104,7 +123,8 @@
     const f = FILES.find((x) => x.id === menuId); if (!f) return;
     editId = f.id; $('figModalTitle').textContent = 'Edit Figma file';
     $('fgName').value = f.name; $('fgLink').value = f.link; $('fgDesc').value = f.description || '';
-    $('fgType').value = f.type || 'Design System'; $('fgMarket').value = f.market || 'Native';
+    $('fgType').value = f.type || 'Design System';
+    resetCover();
     $('figmaOverlay').classList.add('open');
   };
   window.figDelete = async function () {

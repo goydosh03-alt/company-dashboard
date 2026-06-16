@@ -16,9 +16,16 @@ export async function POST({ request }) {
     for (const b of blobs) {
       const meta = await (await fetch(b.url)).json();
       if (meta.id === id) {
-        ['name', 'link', 'type', 'market', 'description'].forEach((k) => {
+        ['name', 'link', 'type', 'description'].forEach((k) => {
           if (url.searchParams.has(k)) meta[k] = url.searchParams.get(k);
         });
+        const buf = Buffer.from(await request.arrayBuffer());
+        if (buf.length > 0) {
+          const cn = (url.searchParams.get('coverName') || 'cover.png').replace(/[^a-zA-Z0-9._-]/g, '_');
+          const ct = url.searchParams.get('coverType') || 'image/png';
+          const cb = await put(`figma-covers/${meta.id}-${Date.now()}-${cn}`, buf, { access: 'public', contentType: ct, ...t });
+          meta.cover = cb.url;
+        }
         meta.updated = new Date().toISOString();
         await put(b.pathname, JSON.stringify(meta), { access: 'public', contentType: 'application/json', allowOverwrite: true, addRandomSuffix: false, ...t });
         return json({ ok: true, file: meta });
