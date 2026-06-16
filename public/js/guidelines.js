@@ -3,12 +3,13 @@
   if (!sections.length) return;
 
   const GL = {
-    'gl-overview': { t: 'Overview', d: 'Where the system’s thinking lives — principles, rules and accessibility.' },
+    'gl-overview': { t: 'Overview', d: 'Where the system’s thinking lives — principles, accessibility, layout and states.' },
     'gl-principles': { t: 'Principles', d: 'The values that guide every design decision in the system.' },
-    'gl-rules': { t: 'Rules', d: 'Hard rules everyone follows across the system.' },
-    'gl-usage': { t: 'Usage', d: 'How to apply the system day to day.' },
     'gl-a11y': { t: 'Accessibility', d: 'WCAG 2.1 AA baseline for everything we ship.' },
-    'gl-contribution': { t: 'Contribution', d: 'How guidelines are written and proposed via GitHub.' },
+    'gl-layout': { t: 'Layout & Grid', d: 'Regions, grid rhythm and responsive rules shared by all products.' },
+    'gl-interaction': { t: 'Interaction & States', d: 'One state model applied across every component.' },
+    'gl-content': { t: 'Content & Voice', d: 'How we write — clear, concise, human.' },
+    'gl-contribution': { t: 'Contribution', d: 'How foundations are written and proposed via GitHub.' },
   };
   const links = document.querySelectorAll('.sub .s-item[data-scroll]');
   const $ = (id) => document.getElementById(id);

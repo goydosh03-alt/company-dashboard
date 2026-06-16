@@ -1,19 +1,29 @@
 <div class="page-head">
-  <div><h2 id="phTitle">Principles</h2><p id="phDesc">The values that guide every design decision in the system.</p></div>
+  <div><h2 id="phTitle">Overview</h2><p id="phDesc">Where the system’s thinking lives — principles, accessibility, layout and states.</p></div>
 </div>
 
 <!-- OVERVIEW -->
 <section class="gl-section active" id="gl-overview">
   <div class="hero" style="margin-bottom:20px">
     <h2>Foundations of junoo.digital</h2>
-    <p>The shared principles, rules and accessibility baseline that keep every product consistent — the “how we think” behind the components and tokens.</p>
+    <p>The shared rules of our design language — applied the same way across every product (Native, COM, KZ and beyond). Foundations sit above tokens and components: they explain how to think and apply, not just what the values are.</p>
   </div>
-  <div class="pr-grid">
+
+  <div class="tiers">
+    <div class="tier"><span class="tier-tag">Foundations</span><b>How we think</b><span>principles · a11y · layout · states</span></div>
+    <span class="tier-arrow material-symbols-outlined">arrow_forward</span>
+    <div class="tier"><span class="tier-tag">Tokens</span><b>What we use</b><span>color · type · spacing · motion</span></div>
+    <span class="tier-arrow material-symbols-outlined">arrow_forward</span>
+    <div class="tier"><span class="tier-tag">Components</span><b>What we build</b><span>buttons · inputs · cards</span></div>
+  </div>
+
+  <div class="pr-grid" style="margin-top:6px">
     <a class="pr-card" data-goto="gl-principles"><div class="ic c-red"><span class="material-symbols-outlined">foundation</span></div><b>Principles</b><p>The values guiding every decision.</p></a>
-    <a class="pr-card" data-goto="gl-rules"><div class="ic c-violet"><span class="material-symbols-outlined">gavel</span></div><b>Rules</b><p>Hard rules everyone follows.</p></a>
-    <a class="pr-card" data-goto="gl-usage"><div class="ic c-blue"><span class="material-symbols-outlined">rule</span></div><b>Usage</b><p>How to apply the system daily.</p></a>
-    <a class="pr-card" data-goto="gl-a11y"><div class="ic c-green"><span class="material-symbols-outlined">accessibility_new</span></div><b>Accessibility</b><p>WCAG AA baseline.</p></a>
-    <a class="pr-card" data-goto="gl-contribution"><div class="ic c-amber"><span class="material-symbols-outlined">volunteer_activism</span></div><b>Contribution</b><p>Propose changes via GitHub.</p></a>
+    <a class="pr-card" data-goto="gl-a11y"><div class="ic c-green"><span class="material-symbols-outlined">accessibility_new</span></div><b>Accessibility</b><p>WCAG AA baseline for all products.</p></a>
+    <a class="pr-card" data-goto="gl-layout"><div class="ic c-blue"><span class="material-symbols-outlined">grid_view</span></div><b>Layout &amp; Grid</b><p>Regions, grid and responsive rules.</p></a>
+    <a class="pr-card" data-goto="gl-interaction"><div class="ic c-violet"><span class="material-symbols-outlined">touch_app</span></div><b>Interaction &amp; States</b><p>One state model for every component.</p></a>
+    <a class="pr-card" data-goto="gl-content"><div class="ic c-amber"><span class="material-symbols-outlined">edit_note</span></div><b>Content &amp; Voice</b><p>How we write across the product.</p></a>
+    <a class="pr-card" data-goto="gl-contribution"><div class="ic c-red"><span class="material-symbols-outlined">volunteer_activism</span></div><b>Contribution</b><p>Extend the system via GitHub.</p></a>
   </div>
 </section>
 
@@ -29,53 +39,80 @@
   </div>
 </section>
 
-<!-- RULES -->
-<section class="gl-section" id="gl-rules">
-  <div class="doc">
-    <p class="lead">Hard rules everyone follows — no exceptions without a documented decision.</p>
-    <div class="rules">
-      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Use design tokens for every color, size and spacing value.</p></div></div>
-      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Hardcode hex, px or one-off shadows in components.</p></div></div>
-      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Compose screens from existing components.</p></div></div>
-      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Rebuild a component that already exists.</p></div></div>
-    </div>
-    <h3>Naming</h3>
-    <p>Tokens: <code>category/role-variant</code> (e.g. <code>color/accent-soft</code>). Components: PascalCase. Files &amp; branches: kebab-case.</p>
-  </div>
-</section>
-
-<!-- USAGE -->
-<section class="gl-section" id="gl-usage">
-  <div class="doc">
-    <p class="lead">How to apply the system day to day.</p>
-    <h3>Reuse vs. create</h3>
-    <p>Start from an existing component. If it's 80% there, extend it with a variant. Create a new component only when the pattern is genuinely new and will be reused.</p>
-    <h3>Exceptions</h3>
-    <p>Edge cases happen. When you must deviate, document why in the pull request so the decision is visible — an undocumented exception is a bug.</p>
-    <div class="doc-list">
-      <a class="doc-link"><span class="material-symbols-outlined">palette</span><div><b>Need a value?</b><span>Pull it from Tokens, not from a screenshot.</span></div></a>
-      <a class="doc-link"><span class="material-symbols-outlined">widgets</span><div><b>Need UI?</b><span>Check Components first.</span></div></a>
-    </div>
-  </div>
-</section>
-
 <!-- ACCESSIBILITY -->
 <section class="gl-section" id="gl-a11y">
   <div class="doc">
-    <p class="lead">WCAG 2.1 AA is the baseline for everything we ship.</p>
+    <p class="lead">WCAG 2.1 AA is the baseline for everything we ship — on every product.</p>
     <div class="rules">
       <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Keep text contrast ≥ 4.5:1 (≥ 3:1 for large text).</p></div></div>
       <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Convey meaning with color alone.</p></div></div>
-      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Provide visible focus states and ≥ 44px touch targets.</p></div></div>
-      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Remove outlines without a replacement focus style.</p></div></div>
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Provide visible focus and ≥ 44px touch targets.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Trap keyboard focus or hide it.</p></div></div>
     </div>
+    <h3>Checklist</h3>
+    <div class="doc-list">
+      <a class="doc-link"><span class="material-symbols-outlined">contrast</span><div><b>Contrast</b><span>Verify with the Tokens → Color contrast pairs.</span></div></a>
+      <a class="doc-link"><span class="material-symbols-outlined">keyboard</span><div><b>Keyboard</b><span>Every action reachable & operable without a mouse.</span></div></a>
+      <a class="doc-link"><span class="material-symbols-outlined">screen_reader</span><div><b>Semantics</b><span>Use native elements and labels for screen readers.</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- LAYOUT & GRID -->
+<section class="gl-section" id="gl-layout">
+  <div class="doc">
+    <p class="lead">A consistent three-region shell and a 4px rhythm keep every product feeling like one system.</p>
+    <h3>App regions</h3>
+  </div>
+  <div class="bp-screens" style="grid-template-columns:1fr;max-width:420px">
+    <div class="screen"><div class="sc-top"></div><div class="sc-body"><div class="sc-side"></div><div class="sc-side" style="width:34px;background:#eef0f3"></div><div class="sc-col"></div></div><span>menu · overview · content</span></div>
+  </div>
+  <div class="doc" style="margin-top:16px">
+    <h3>Rhythm &amp; responsive</h3>
+    <p>Spacing follows the 4px scale (see Tokens → Spacing). Layouts adapt at the standard breakpoints (sm 640 · md 768 · lg 1024 · xl 1280).</p>
+    <div class="rules">
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Keep the menu fixed; scroll content inside the white panel.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Invent new page chrome per product.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTION & STATES -->
+<section class="gl-section" id="gl-interaction">
+  <div class="doc"><p class="lead">One state model applies to every interactive component — so behavior is predictable everywhere.</p></div>
+  <div class="states-grid">
+    <div class="st-cell"><span>Enabled</span><button class="btn btn-primary">Action</button></div>
+    <div class="st-cell"><span>Hover</span><button class="btn btn-primary" style="background:#d23b40">Action</button></div>
+    <div class="st-cell"><span>Focus</span><button class="btn btn-primary" style="box-shadow:0 0 0 3px #f5a3a6">Action</button></div>
+    <div class="st-cell"><span>Pressed</span><button class="btn btn-primary" style="background:#b22e33">Action</button></div>
+    <div class="st-cell"><span>Selected</span><button class="btn btn-ghost" style="border-color:#e5484d;color:#e5484d;background:#fdecec">Action</button></div>
+    <div class="st-cell"><span>Disabled</span><button class="btn btn-primary" disabled>Action</button></div>
+  </div>
+  <div class="rules">
+    <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Use the same states & motion tokens across components.</p></div></div>
+    <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Invent custom hover/focus styles per screen.</p></div></div>
+  </div>
+</section>
+
+<!-- CONTENT & VOICE -->
+<section class="gl-section" id="gl-content">
+  <div class="doc">
+    <p class="lead">Clear, concise, human. Write for the person doing the task.</p>
+    <div class="rules">
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Use action verbs — “Save changes”, “Upload plugin”.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Be vague — “Submit”, “OK”, “Click here”.</p></div></div>
+      <div class="rule do"><span class="material-symbols-outlined">check_circle</span><div><b>Do</b><p>Write in sentence case.</p></div></div>
+      <div class="rule dont"><span class="material-symbols-outlined">cancel</span><div><b>Don't</b><p>Use Title Case Everywhere Or ALL CAPS.</p></div></div>
+    </div>
+    <h3>Tone</h3>
+    <p>Confident and friendly, never clever at the cost of clarity. Short sentences. No jargon the user wouldn't use.</p>
   </div>
 </section>
 
 <!-- CONTRIBUTION -->
 <section class="gl-section" id="gl-contribution">
   <div class="doc">
-    <p class="lead">Guidelines are Markdown files in the repo — anyone can propose changes.</p>
+    <p class="lead">Foundations are Markdown in the repo — anyone can propose changes.</p>
     <div class="flow">
       <span class="flow-step"><span class="material-symbols-outlined">edit</span> Edit Markdown</span>
       <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
@@ -83,11 +120,11 @@
       <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
       <span class="flow-step"><span class="material-symbols-outlined">public</span> Merged → live</span>
     </div>
-    <h3>What a guideline contains</h3>
-    <p>A short principle or rule, when to apply it, examples, and any exceptions. Keep it concrete and skimmable.</p>
+    <h3>What a foundation entry contains</h3>
+    <p>A principle or rule, when it applies, examples, and any exceptions. Concrete and skimmable.</p>
     <a class="repo-card" href="https://github.com/goydosh03-alt/company-dashboard" target="_blank" rel="noopener">
       <div class="ic c-red"><span class="material-symbols-outlined">code</span></div>
-      <div class="rc-meta"><b>company-dashboard</b><span>Edit guidelines in /src/content</span></div>
+      <div class="rc-meta"><b>company-dashboard</b><span>Edit foundations in /src/content</span></div>
       <span class="material-symbols-outlined rc-go">open_in_new</span>
     </a>
   </div>
