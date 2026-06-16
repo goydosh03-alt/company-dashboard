@@ -2,15 +2,14 @@
 import Shell from '../layouts/Shell.astro';
 import content from '../fragments/components.html?raw';
 const overview = [
-  { icon: 'apps', label: 'All', active: true },
-  { icon: 'smart_button', label: 'Buttons' },
-  { icon: 'edit', label: 'Inputs' },
-  { icon: 'crop_square', label: 'Cards' },
-  { icon: 'menu', label: 'Navigation' },
-  { icon: 'notifications', label: 'Feedback' },
+  { icon: 'smart_button', label: 'Button', comp: 'button', active: true },
+  { icon: 'edit_square', label: 'Input', comp: 'input' },
+  { icon: 'toggle_on', label: 'Toggle', comp: 'toggle' },
+  { icon: 'crop_square', label: 'Card', comp: 'card' },
+  { icon: 'tab', label: 'Tabs', comp: 'tabs' },
 ];
 ---
-<Shell active="Components" title="Components" crumb="/ Components" overview={overview}>
+<Shell active="Components" title="Components" crumb="/ Button" overview={overview}>
   <Fragment set:html={content} />
   <script is:inline src="/js/components.js"></script>
 </Shell>
