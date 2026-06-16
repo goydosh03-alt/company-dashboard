@@ -12,24 +12,37 @@
     { type: 'Page', title: 'Components', href: '/components' },
     { type: 'Page', title: 'Foundations', href: '/guidelines' },
     { type: 'Page', title: 'Figma', href: '/figma' },
-    { type: 'Token', title: 'Colors', href: '/tokens' },
+    { type: 'Page', title: 'GitHub', href: '/github' },
+    // token groups
+    { type: 'Token', title: 'Color', href: '/tokens' },
     { type: 'Token', title: 'Typography', href: '/tokens' },
+    { type: 'Token', title: 'Spacing', href: '/tokens' },
     { type: 'Token', title: 'Radius', href: '/tokens' },
     { type: 'Token', title: 'Shadows', href: '/tokens' },
-    { type: 'Token', title: 'Spacing', href: '/tokens' },
+    { type: 'Token', title: 'Motion', href: '/tokens' },
+    { type: 'Token', title: 'Breakpoints', href: '/tokens' },
+    { type: 'Token', title: 'Iconography', href: '/tokens' },
+    // components
     { type: 'Component', title: 'Button', href: '/components' },
     { type: 'Component', title: 'Input', href: '/components' },
-    { type: 'Component', title: 'Card', href: '/components' },
     { type: 'Component', title: 'Toggle', href: '/components' },
+    { type: 'Component', title: 'Card', href: '/components' },
     { type: 'Component', title: 'Tabs', href: '/components' },
-    { type: 'Component', title: 'Toast', href: '/components' },
-    { type: 'Foundations', title: 'Principles', href: '/guidelines' },
-    { type: 'Foundations', title: 'Rules', href: '/guidelines' },
-    { type: 'Foundations', title: 'Usage', href: '/guidelines' },
+    // foundations topics
+    { type: 'Foundations', title: 'About the system', href: '/guidelines' },
+    { type: 'Foundations', title: 'Brand', href: '/guidelines' },
     { type: 'Foundations', title: 'Accessibility', href: '/guidelines' },
+    { type: 'Foundations', title: 'Layout & Grid', href: '/guidelines' },
+    { type: 'Foundations', title: 'Interaction & States', href: '/guidelines' },
+    { type: 'Foundations', title: 'Content & Voice', href: '/guidelines' },
     { type: 'Foundations', title: 'Contribution', href: '/guidelines' },
+    // figma categories
+    { type: 'Figma', title: 'Design System', href: '/figma' },
+    { type: 'Figma', title: 'Themes', href: '/figma' },
+    { type: 'Figma', title: 'Marketing', href: '/figma' },
+    { type: 'Figma', title: 'Testing', href: '/figma' },
   ];
-  const ICON = { Page: 'description', Token: 'palette', Component: 'widgets', Guideline: 'menu_book', Plugin: 'extension', Figma: 'design_services' };
+  const ICON = { Page: 'description', Token: 'palette', Component: 'widgets', Foundations: 'menu_book', Plugin: 'extension', Figma: 'design_services' };
 
   let INDEX = STATIC.slice();
   let loaded = false;

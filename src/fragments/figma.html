@@ -47,3 +47,19 @@
     </div>
   </div>
 </div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="overlay" id="figDelOverlay">
+  <div class="modal modal-sm">
+    <div class="mh"><b>Delete file</b><span class="material-symbols-outlined x" onclick="figCloseDel()">close</span></div>
+    <div class="mb">
+      <div class="del-warn"><span class="material-symbols-outlined">warning</span>
+        <p>Delete <b id="figDelName">this file</b> permanently? The card is removed from storage for everyone. This can't be undone.</p>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btn-ghost" onclick="figCloseDel()">Cancel</button>
+      <button class="btn btn-danger" onclick="figConfirmDel()"><span class="material-symbols-outlined">delete</span> Delete file</button>
+    </div>
+  </div>
+</div>

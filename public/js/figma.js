@@ -23,7 +23,7 @@
     { name: 'Sandbox · For Testing', type: 'Testing', description: 'Experiments & QA', link: '#', date: days(0) },
   ];
 
-  let FILES = [], currentType = 'all', menuId = null, editId = null, pickedCover = null;
+  let FILES = [], currentType = 'all', menuId = null, editId = null, delId = null, pickedCover = null;
   function setDD(id, v) { const dd = $(id); dd.dataset.value = v; dd.querySelector('.dd-label').textContent = v; }
 
   const slug = (t) => 'fc-' + (t || 'design system').toLowerCase().replace(/\s+/g, '-');
@@ -128,10 +128,18 @@
     resetCover();
     $('figmaOverlay').classList.add('open');
   };
-  window.figDelete = async function () {
-    if (!menuId || !confirm('Delete this Figma file card?')) return;
-    try { const r = await fetch('/api/figma-delete?id=' + encodeURIComponent(menuId), { method: 'POST' }); if (!r.ok) throw new Error('HTTP ' + r.status); await load(); }
+  window.figDelete = function () {
+    if (!menuId) return; delId = menuId;
+    const f = FILES.find((x) => x.id === delId);
+    $('figDelName').textContent = f ? f.name : 'this file';
+    $('figDelOverlay').classList.add('open');
+  };
+  window.figCloseDel = function () { $('figDelOverlay').classList.remove('open'); delId = null; };
+  window.figConfirmDel = async function () {
+    if (!delId) return;
+    try { const r = await fetch('/api/figma-delete?id=' + encodeURIComponent(delId), { method: 'POST' }); if (!r.ok) throw new Error('HTTP ' + r.status); await load(); }
     catch (err) { alert('Delete failed: ' + err.message); }
+    window.figCloseDel();
   };
 
   load();

@@ -211,11 +211,11 @@
   .up-btn .material-symbols-outlined{font-size:17px;color:#fff}
   .overlay{position:fixed;inset:0;background:rgba(16,18,23,.45);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:50}
   .overlay.open{display:flex}
-  .modal{background:#fff;width:440px;max-width:calc(100vw - 32px);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
+  .modal{background:#fff;width:440px;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);display:flex;flex-direction:column;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
   .modal .mh{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid var(--border)}
   .modal .mh b{font-size:15px;font-weight:660}
   .modal .mh .x{cursor:pointer;color:var(--text-3)}
-  .modal .mb{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+  .modal .mb{padding:18px 20px;display:flex;flex-direction:column;gap:14px;overflow-y:auto}
   .field label{display:block;font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:5px}
   .field input{width:100%;border:1px solid var(--border-strong);border-radius:9px;padding:9px 11px;font-family:inherit;font-size:13px;outline:none}
   .field input:focus{border-color:var(--accent)}

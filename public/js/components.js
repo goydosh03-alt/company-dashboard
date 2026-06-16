@@ -2,13 +2,8 @@
   const $ = (id) => document.getElementById(id);
 
   // ---- component switch (sidebar) ----
-  const COMP = {
-    button: { t: 'Button', d: 'Lets people take an action with a single tap.' },
-    input: { t: 'Input', d: 'Lets people enter and edit text.' },
-    toggle: { t: 'Toggle', d: 'Switches a single option on or off.' },
-    card: { t: 'Card', d: 'Groups related content and actions.' },
-    tabs: { t: 'Tabs', d: 'Switches between related views.' },
-  };
+  let COMP = {};
+  try { COMP = JSON.parse($('compData').textContent); } catch (e) {}
   const sections = [...document.querySelectorAll('.comp-section')];
   const compLinks = document.querySelectorAll('.sub .s-item[data-comp]');
   function showComp(name) {

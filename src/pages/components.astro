@@ -1,15 +1,72 @@
 ---
 import Shell from '../layouts/Shell.astro';
-import content from '../fragments/components.html?raw';
-const overview = [
-  { icon: 'smart_button', label: 'Button', comp: 'button', active: true },
-  { icon: 'edit_square', label: 'Input', comp: 'input' },
-  { icon: 'toggle_on', label: 'Toggle', comp: 'toggle' },
-  { icon: 'crop_square', label: 'Card', comp: 'card' },
-  { icon: 'tab', label: 'Tabs', comp: 'tabs' },
+import buttonContent from '../fragments/components.html?raw';
+
+const comps = [
+  // Actions
+  { slug: 'button', label: 'Button', icon: 'smart_button', group: 'Actions' },
+  { slug: 'icon-button', label: 'Icon button', icon: 'radio_button_checked', group: 'Actions' },
+  { slug: 'segmented', label: 'Segmented button', icon: 'view_week', group: 'Actions' },
+  { slug: 'chip', label: 'Chip', icon: 'label', group: 'Actions' },
+  { slug: 'fab', label: 'FAB', icon: 'add_circle', group: 'Actions' },
+  // Forms
+  { slug: 'input', label: 'Input', icon: 'edit_square', group: 'Forms' },
+  { slug: 'textarea', label: 'Textarea', icon: 'notes', group: 'Forms' },
+  { slug: 'select', label: 'Select / Dropdown', icon: 'arrow_drop_down_circle', group: 'Forms' },
+  { slug: 'checkbox', label: 'Checkbox', icon: 'check_box', group: 'Forms' },
+  { slug: 'radio', label: 'Radio', icon: 'radio_button_checked', group: 'Forms' },
+  { slug: 'toggle', label: 'Toggle / Switch', icon: 'toggle_on', group: 'Forms' },
+  { slug: 'slider', label: 'Slider', icon: 'tune', group: 'Forms' },
+  { slug: 'search', label: 'Search', icon: 'search', group: 'Forms' },
+  { slug: 'datepicker', label: 'Date picker', icon: 'calendar_month', group: 'Forms' },
+  // Navigation
+  { slug: 'tabs', label: 'Tabs', icon: 'tab', group: 'Navigation' },
+  { slug: 'breadcrumb', label: 'Breadcrumb', icon: 'chevron_right', group: 'Navigation' },
+  { slug: 'pagination', label: 'Pagination', icon: 'more_horiz', group: 'Navigation' },
+  { slug: 'menu', label: 'Menu', icon: 'menu', group: 'Navigation' },
+  { slug: 'link', label: 'Link', icon: 'link', group: 'Navigation' },
+  // Containers
+  { slug: 'card', label: 'Card', icon: 'crop_square', group: 'Containers' },
+  { slug: 'accordion', label: 'Accordion', icon: 'expand_more', group: 'Containers' },
+  { slug: 'dialog', label: 'Dialog / Modal', icon: 'web_asset', group: 'Containers' },
+  { slug: 'drawer', label: 'Drawer', icon: 'menu_open', group: 'Containers' },
+  { slug: 'tooltip', label: 'Tooltip', icon: 'chat_bubble', group: 'Containers' },
+  { slug: 'popover', label: 'Popover', icon: 'speaker_notes', group: 'Containers' },
+  // Feedback
+  { slug: 'toast', label: 'Toast', icon: 'notifications', group: 'Feedback' },
+  { slug: 'alert', label: 'Alert / Banner', icon: 'warning', group: 'Feedback' },
+  { slug: 'badge', label: 'Badge', icon: 'counter_1', group: 'Feedback' },
+  { slug: 'progress', label: 'Progress', icon: 'progress_activity', group: 'Feedback' },
+  { slug: 'spinner', label: 'Spinner', icon: 'autorenew', group: 'Feedback' },
+  { slug: 'skeleton', label: 'Skeleton', icon: 'view_day', group: 'Feedback' },
+  // Data
+  { slug: 'table', label: 'Table', icon: 'table_rows', group: 'Data' },
+  { slug: 'list', label: 'List', icon: 'list', group: 'Data' },
+  { slug: 'avatar', label: 'Avatar', icon: 'account_circle', group: 'Data' },
+  { slug: 'tag', label: 'Tag', icon: 'sell', group: 'Data' },
 ];
+
+const overview = [];
+let lastGroup = null;
+for (const c of comps) {
+  if (c.group !== lastGroup) { overview.push({ divider: c.group }); lastGroup = c.group; }
+  overview.push({ icon: c.icon, label: c.label, comp: c.slug, active: c.slug === 'button' });
+}
+const meta = {};
+comps.forEach((c) => { meta[c.slug] = { t: c.label, d: c.slug === 'button' ? 'Lets people take an action with a single tap.' : 'In progress — built on the Button template.' }; });
+const placeholders = comps.filter((c) => c.slug !== 'button');
 ---
 <Shell active="Components" title="Components" crumb="/ Button" overview={overview}>
-  <Fragment set:html={content} />
+  <Fragment set:html={buttonContent} />
+  {placeholders.map((c) => (
+    <section class="comp-section" id={`comp-${c.slug}`}>
+      <div class="comp-soon">
+        <span class="material-symbols-outlined">{c.icon}</span>
+        <b>{c.label} — in progress</b>
+        <p>Will follow the same template as Button: Overview · Variants · Anatomy · States · Specs · Guidelines · Accessibility.</p>
+      </div>
+    </section>
+  ))}
+  <script id="compData" type="application/json" set:html={JSON.stringify(meta)}></script>
   <script is:inline src="/js/components.js"></script>
 </Shell>
