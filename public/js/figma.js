@@ -24,6 +24,7 @@
   ];
 
   let FILES = [], currentType = 'all', menuId = null, editId = null, pickedCover = null;
+  function setDD(id, v) { const dd = $(id); dd.dataset.value = v; dd.querySelector('.dd-label').textContent = v; }
 
   const slug = (t) => 'fc-' + (t || 'design system').toLowerCase().replace(/\s+/g, '-');
   function rel(iso) {
@@ -42,11 +43,11 @@
       ? `<div class="fcover" style="background-image:url('${f.cover}');background-size:cover;background-position:center"></div>`
       : `<div class="fcover ${slug(f.type)}"><span class="material-symbols-outlined">design_services</span></div>`;
     const open = real
-      ? `<a class="sbtn solid fw" target="_blank" href="${f.link}">Open <span class="material-symbols-outlined">arrow_forward</span></a>`
-      : `<span class="sbtn fw" style="opacity:.55;cursor:default">Demo</span>`;
+      ? `<a class="sbtn solid" target="_blank" href="${f.link}">Open <span class="material-symbols-outlined">arrow_forward</span></a>`
+      : `<span class="sbtn" style="opacity:.55;cursor:default">Demo</span>`;
     const el = document.createElement('div'); el.className = 'fcard'; if (f.id) el.dataset.id = f.id;
     el.innerHTML = `${dots}${cover}<div class="fbody"><h4></h4><div class="fdesc"></div>
-      <div class="fupdated"><span class="material-symbols-outlined">schedule</span> Updated ${rel(f.updated || f.date)}</div>${open}</div>`;
+      <div class="ffoot"><span class="fupdated"><span class="material-symbols-outlined">schedule</span> Updated ${rel(f.updated || f.date)}</span>${open}</div></div>`;
     el.querySelector('h4').textContent = f.name;
     el.querySelector('.fdesc').textContent = f.description || '';
     return el;
@@ -94,7 +95,7 @@
   window.openFigma = function () {
     editId = null; $('figModalTitle').textContent = 'Add Figma file';
     $('fgName').value = ''; $('fgLink').value = ''; $('fgDesc').value = '';
-    $('fgType').value = (currentType !== 'all') ? currentType : 'Design System';
+    setDD('fgType', (currentType !== 'all') ? currentType : 'Design System');
     resetCover();
     $('figmaOverlay').classList.add('open');
   };
@@ -102,7 +103,7 @@
 
   window.submitFigma = async function () {
     const name = $('fgName').value.trim(), link = $('fgLink').value.trim();
-    const type = $('fgType').value, description = $('fgDesc').value.trim();
+    const type = ($('fgType').dataset.value || 'Design System'), description = $('fgDesc').value.trim();
     if (!name || !link) { alert('Add a name and a Figma link'); return; }
     const q = new URLSearchParams({ name, link, type, description });
     if (pickedCover) { q.set('coverName', pickedCover.name); q.set('coverType', pickedCover.type || 'image/png'); }
@@ -123,7 +124,7 @@
     const f = FILES.find((x) => x.id === menuId); if (!f) return;
     editId = f.id; $('figModalTitle').textContent = 'Edit Figma file';
     $('fgName').value = f.name; $('fgLink').value = f.link; $('fgDesc').value = f.description || '';
-    $('fgType').value = f.type || 'Design System';
+    setDD('fgType', f.type || 'Design System');
     resetCover();
     $('figmaOverlay').classList.add('open');
   };

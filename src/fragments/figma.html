@@ -19,9 +19,16 @@
     <div class="mb">
       <div class="field"><label>File name</label><input id="fgName" placeholder="e.g. Design System · Core"></div>
       <div class="field"><label>Type</label>
-        <select id="fgType">
-          <option>Design System</option><option>Themes</option><option>Foundations</option><option>Marketing</option><option>Testing</option>
-        </select>
+        <div class="dd" id="fgType" data-value="Design System">
+          <button type="button" class="dd-btn" onclick="ddToggle(event)"><span class="dd-label">Design System</span><span class="material-symbols-outlined">unfold_more</span></button>
+          <div class="dd-menu">
+            <div class="dd-opt" onclick="ddPick(this)">Design System</div>
+            <div class="dd-opt" onclick="ddPick(this)">Themes</div>
+            <div class="dd-opt" onclick="ddPick(this)">Foundations</div>
+            <div class="dd-opt" onclick="ddPick(this)">Marketing</div>
+            <div class="dd-opt" onclick="ddPick(this)">Testing</div>
+          </div>
+        </div>
       </div>
       <div class="field"><label>Cover <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
         <div class="drop" id="fgDrop" onclick="document.getElementById('fgCover').click()">
