@@ -20,7 +20,15 @@ window.ddPick = function (el) {
 };
 document.addEventListener('click', () => document.querySelectorAll('.dd.open').forEach((d) => d.classList.remove('open')));
 
-// L2 sort toggle: click the sub-head arrow → A→Z, click again → default
+// L2 sub-head: sticky line appears on scroll
+(function () {
+  const sub = document.querySelector('.sub');
+  const head = sub && sub.querySelector('.sub-head');
+  if (!sub || !head) return;
+  sub.addEventListener('scroll', () => head.classList.toggle('scrolled', sub.scrollTop > 2));
+})();
+
+// L2 sort toggle: A→Z WITHIN each category (group labels stay); click again → default
 (function () {
   const icon = document.querySelector('.sub-head .material-symbols-outlined');
   const firstItem = document.querySelector('.sub .s-item');
@@ -35,7 +43,14 @@ document.addEventListener('click', () => document.querySelectorAll('.dd.open').f
     sorted = !sorted;
     original.forEach((el) => el.remove());
     if (sorted) {
-      original.filter((c) => c.classList.contains('s-item')).sort((a, b) => label(a).localeCompare(label(b))).forEach((el) => cont.appendChild(el));
+      // sort items within each segment delimited by .s-label dividers
+      let bucket = [];
+      const flush = () => { bucket.sort((a, b) => label(a).localeCompare(label(b))).forEach((el) => cont.appendChild(el)); bucket = []; };
+      original.forEach((el) => {
+        if (el.classList.contains('s-label')) { flush(); cont.appendChild(el); }
+        else bucket.push(el);
+      });
+      flush();
     } else {
       original.forEach((el) => cont.appendChild(el));
     }
