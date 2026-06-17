@@ -48,6 +48,6 @@ document.addEventListener('click', () => document.querySelectorAll('.dd.open').f
     } else {
       original.forEach((el) => sub.appendChild(el));
     }
-    icon.textContent = sorted ? 'sort_by_alpha' : 'unfold_more';
+    icon.classList.toggle('sorted-on', sorted);
   });
 })();
