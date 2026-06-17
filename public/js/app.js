@@ -23,9 +23,10 @@ document.addEventListener('click', () => document.querySelectorAll('.dd.open').f
 // L2 sort toggle: click the sub-head arrow → A→Z, click again → default
 (function () {
   const icon = document.querySelector('.sub-head .material-symbols-outlined');
-  const sub = icon && icon.closest('.sub');
-  if (!sub) return;
-  const original = [...sub.children].filter((c) => !c.classList.contains('sub-head'));
+  const firstItem = document.querySelector('.sub .s-item');
+  const cont = firstItem && firstItem.parentElement; // the items wrapper inside .sub
+  if (!icon || !cont) return;
+  const original = [...cont.children];
   const label = (a) => { let t = a.textContent; a.querySelectorAll('.material-symbols-outlined,.flag,.count').forEach((s) => { t = t.replace(s.textContent, ''); }); return t.trim().toLowerCase(); };
   let sorted = false;
   icon.style.cursor = 'pointer';
@@ -34,9 +35,9 @@ document.addEventListener('click', () => document.querySelectorAll('.dd.open').f
     sorted = !sorted;
     original.forEach((el) => el.remove());
     if (sorted) {
-      [...original].filter((c) => c.classList.contains('s-item')).sort((a, b) => label(a).localeCompare(label(b))).forEach((el) => sub.appendChild(el));
+      original.filter((c) => c.classList.contains('s-item')).sort((a, b) => label(a).localeCompare(label(b))).forEach((el) => cont.appendChild(el));
     } else {
-      original.forEach((el) => sub.appendChild(el));
+      original.forEach((el) => cont.appendChild(el));
     }
     icon.classList.toggle('sorted-on', sorted);
   });
