@@ -43,14 +43,8 @@ document.addEventListener('click', () => document.querySelectorAll('.dd.open').f
     sorted = !sorted;
     original.forEach((el) => el.remove());
     if (sorted) {
-      // sort items within each segment delimited by .s-label dividers
-      let bucket = [];
-      const flush = () => { bucket.sort((a, b) => label(a).localeCompare(label(b))).forEach((el) => cont.appendChild(el)); bucket = []; };
-      original.forEach((el) => {
-        if (el.classList.contains('s-label')) { flush(); cont.appendChild(el); }
-        else bucket.push(el);
-      });
-      flush();
+      // flat A→Z (group labels hidden while sorted)
+      original.filter((c) => c.classList.contains('s-item')).sort((a, b) => label(a).localeCompare(label(b))).forEach((el) => cont.appendChild(el));
     } else {
       original.forEach((el) => cont.appendChild(el));
     }
