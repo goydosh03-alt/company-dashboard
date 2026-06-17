@@ -20,16 +20,6 @@ window.ddPick = function (el) {
 };
 document.addEventListener('click', () => document.querySelectorAll('.dd.open').forEach((d) => d.classList.remove('open')));
 
-// Sticky page header: offset under .ptop + show a line on scroll
-(function () {
-  const pm = document.querySelector('.panel-main');
-  const ph = document.querySelector('.page-head');
-  const ptop = document.querySelector('.ptop');
-  if (!pm || !ph) return;
-  if (ptop) ph.style.top = ptop.offsetHeight + 'px';
-  pm.addEventListener('scroll', () => ph.classList.toggle('stuck', pm.scrollTop > 4));
-})();
-
 // L2 sort toggle: click the sub-head arrow → A→Z, click again → default
 (function () {
   const icon = document.querySelector('.sub-head .material-symbols-outlined');
