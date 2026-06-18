@@ -4,46 +4,46 @@ import buttonContent from '../fragments/components.html?raw';
 
 const comps = [
   // Actions
-  { slug: 'button', label: 'Button', icon: 'smart_button', group: 'Actions' },
-  { slug: 'icon-button', label: 'Icon button', icon: 'radio_button_checked', group: 'Actions' },
-  { slug: 'segmented', label: 'Segmented button', icon: 'view_week', group: 'Actions' },
-  { slug: 'chip', label: 'Chip', icon: 'label', group: 'Actions' },
-  { slug: 'fab', label: 'FAB', icon: 'add_circle', group: 'Actions' },
+  { slug: 'button', label: 'Button', icon: 'smart_button', group: 'Actions', desc: 'Lets people take an action with a single tap.' },
+  { slug: 'icon-button', label: 'Icon button', icon: 'radio_button_checked', group: 'Actions', desc: 'A compact button showing only an icon.', preview: `<button class="cicon"><span class="material-symbols-outlined">favorite</span></button><button class="cicon"><span class="material-symbols-outlined">share</span></button><button class="cicon"><span class="material-symbols-outlined">more_horiz</span></button>` },
+  { slug: 'segmented', label: 'Segmented button', icon: 'view_week', group: 'Actions', desc: 'Pick one option from a small related set.', preview: `<div class="seg" style="width:240px"><button class="active">Day</button><button>Week</button><button>Month</button></div>` },
+  { slug: 'chip', label: 'Chip', icon: 'label', group: 'Actions', desc: 'Compact element for input, filter or choice.', preview: `<span class="cchip sel"><span class="material-symbols-outlined">check</span> Selected</span><span class="cchip">Filter</span><span class="cchip">Tag <span class="material-symbols-outlined">close</span></span>` },
+  { slug: 'fab', label: 'FAB', icon: 'add_circle', group: 'Actions', desc: 'Floating action button for the primary action.', preview: `<button class="cfab"><span class="material-symbols-outlined">add</span></button>` },
   // Forms
-  { slug: 'input', label: 'Input', icon: 'edit_square', group: 'Forms' },
-  { slug: 'textarea', label: 'Textarea', icon: 'notes', group: 'Forms' },
-  { slug: 'select', label: 'Select / Dropdown', icon: 'arrow_drop_down_circle', group: 'Forms' },
-  { slug: 'checkbox', label: 'Checkbox', icon: 'check_box', group: 'Forms' },
-  { slug: 'radio', label: 'Radio', icon: 'radio_button_checked', group: 'Forms' },
-  { slug: 'toggle', label: 'Toggle / Switch', icon: 'toggle_on', group: 'Forms' },
-  { slug: 'slider', label: 'Slider', icon: 'tune', group: 'Forms' },
-  { slug: 'search', label: 'Search', icon: 'search', group: 'Forms' },
-  { slug: 'datepicker', label: 'Date picker', icon: 'calendar_month', group: 'Forms' },
+  { slug: 'input', label: 'Input', icon: 'edit_square', group: 'Forms', desc: 'Lets people enter and edit a single line of text.', preview: `<input class="cin" placeholder="Email address"><input class="cin" value="hello@junoo.digital"><input class="cin" placeholder="Disabled" disabled>` },
+  { slug: 'textarea', label: 'Textarea', icon: 'notes', group: 'Forms', desc: 'Multi-line text input for longer content.', preview: `<textarea class="cin" placeholder="Write a message…"></textarea>` },
+  { slug: 'select', label: 'Select / Dropdown', icon: 'arrow_drop_down_circle', group: 'Forms', desc: 'Choose one value from a list.', preview: `<div class="cselect">Choose an option <span class="material-symbols-outlined">unfold_more</span></div>` },
+  { slug: 'checkbox', label: 'Checkbox', icon: 'check_box', group: 'Forms', desc: 'Select one or more options.', preview: `<label class="ccheck on"><span class="bx"><span class="material-symbols-outlined">check</span></span> Checked</label><label class="ccheck"><span class="bx"></span> Unchecked</label>` },
+  { slug: 'radio', label: 'Radio', icon: 'radio_button_checked', group: 'Forms', desc: 'Select exactly one option from a set.', preview: `<label class="ccheck cradio on"><span class="bx"></span> Selected</label><label class="ccheck cradio"><span class="bx"></span> Option</label>` },
+  { slug: 'toggle', label: 'Toggle / Switch', icon: 'toggle_on', group: 'Forms', desc: 'Switches a single option on or off.', preview: `<div class="cswitch on"></div><div class="cswitch"></div>` },
+  { slug: 'slider', label: 'Slider', icon: 'tune', group: 'Forms', desc: 'Select a value from a continuous range.', preview: `<div class="cslider"><div class="fill"></div><div class="thumb"></div></div>` },
+  { slug: 'search', label: 'Search', icon: 'search', group: 'Forms', desc: 'Input for finding content quickly.', preview: `<div class="csearch"><span class="material-symbols-outlined">search</span><input placeholder="Search…"></div>` },
+  { slug: 'datepicker', label: 'Date picker', icon: 'calendar_month', group: 'Forms', desc: 'Pick a date from a calendar.', preview: `<div class="cselect" style="min-width:200px">Jun 18, 2026 <span class="material-symbols-outlined">calendar_month</span></div>` },
   // Navigation
-  { slug: 'tabs', label: 'Tabs', icon: 'tab', group: 'Navigation' },
-  { slug: 'breadcrumb', label: 'Breadcrumb', icon: 'chevron_right', group: 'Navigation' },
-  { slug: 'pagination', label: 'Pagination', icon: 'more_horiz', group: 'Navigation' },
-  { slug: 'menu', label: 'Menu', icon: 'menu', group: 'Navigation' },
-  { slug: 'link', label: 'Link', icon: 'link', group: 'Navigation' },
+  { slug: 'tabs', label: 'Tabs', icon: 'tab', group: 'Navigation', desc: 'Switch between related views.', preview: `<div class="ctabs" style="margin:0;border:none"><button class="ctab active">Overview</button><button class="ctab">Specs</button><button class="ctab">Code</button></div>` },
+  { slug: 'breadcrumb', label: 'Breadcrumb', icon: 'chevron_right', group: 'Navigation', desc: 'Shows the path to the current page.', preview: `<div class="cbread"><span>Home</span><span class="material-symbols-outlined">chevron_right</span><span>Library</span><span class="material-symbols-outlined">chevron_right</span><b>Button</b></div>` },
+  { slug: 'pagination', label: 'Pagination', icon: 'more_horiz', group: 'Navigation', desc: 'Navigate across pages of content.', preview: `<div class="cpag"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>›</button></div>` },
+  { slug: 'menu', label: 'Menu', icon: 'menu', group: 'Navigation', desc: 'A list of actions or options.', preview: `<div class="cmenu"><div>Edit</div><div>Duplicate</div><div>Delete</div></div>` },
+  { slug: 'link', label: 'Link', icon: 'link', group: 'Navigation', desc: 'Navigates to another page or resource.', preview: `<a class="clink">Learn more about tokens</a>` },
   // Containers
-  { slug: 'card', label: 'Card', icon: 'crop_square', group: 'Containers' },
-  { slug: 'accordion', label: 'Accordion', icon: 'expand_more', group: 'Containers' },
-  { slug: 'dialog', label: 'Dialog / Modal', icon: 'web_asset', group: 'Containers' },
-  { slug: 'drawer', label: 'Drawer', icon: 'menu_open', group: 'Containers' },
-  { slug: 'tooltip', label: 'Tooltip', icon: 'chat_bubble', group: 'Containers' },
-  { slug: 'popover', label: 'Popover', icon: 'speaker_notes', group: 'Containers' },
+  { slug: 'card', label: 'Card', icon: 'crop_square', group: 'Containers', desc: 'Groups related content and actions.', preview: `<div class="ccard2"><div class="cv"></div><div class="bd"><b>Card title</b><p>Supporting text goes here.</p></div></div>` },
+  { slug: 'accordion', label: 'Accordion', icon: 'expand_more', group: 'Containers', desc: 'Expandable sections that reveal content.', preview: `<div class="cacc"><div class="hd">What is a token? <span class="material-symbols-outlined">expand_more</span></div><div class="bd">A named design decision stored as a reusable value.</div></div>` },
+  { slug: 'dialog', label: 'Dialog / Modal', icon: 'web_asset', group: 'Containers', desc: 'A focused overlay for a single task.', preview: `<div class="cdialog"><div class="hd">Delete item?</div><div class="bd2">This action can’t be undone.</div><div class="ft"><button class="btn btn-ghost">Cancel</button><button class="btn btn-danger">Delete</button></div></div>` },
+  { slug: 'drawer', label: 'Drawer', icon: 'menu_open', group: 'Containers', desc: 'A panel that slides in from the edge.', preview: `<div class="cdrawer"><div class="panel"><div class="ln" style="width:55%"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:70%"></div></div></div>` },
+  { slug: 'tooltip', label: 'Tooltip', icon: 'chat_bubble', group: 'Containers', desc: 'A small label shown on hover or focus.', preview: `<div class="ctip">Save changes</div>` },
+  { slug: 'popover', label: 'Popover', icon: 'speaker_notes', group: 'Containers', desc: 'Rich content shown on demand.', preview: `<div class="cmenu" style="width:210px;padding:13px"><b style="font-size:13px">Popover</b><p style="font-size:12px;color:var(--text-2);margin-top:4px">Contextual content and actions on demand.</p></div>` },
   // Feedback
-  { slug: 'toast', label: 'Toast', icon: 'notifications', group: 'Feedback' },
-  { slug: 'alert', label: 'Alert / Banner', icon: 'warning', group: 'Feedback' },
-  { slug: 'badge', label: 'Badge', icon: 'counter_1', group: 'Feedback' },
-  { slug: 'progress', label: 'Progress', icon: 'progress_activity', group: 'Feedback' },
-  { slug: 'spinner', label: 'Spinner', icon: 'autorenew', group: 'Feedback' },
-  { slug: 'skeleton', label: 'Skeleton', icon: 'view_day', group: 'Feedback' },
+  { slug: 'toast', label: 'Toast', icon: 'notifications', group: 'Feedback', desc: 'A brief, auto-dismissing message.', preview: `<div class="calert" style="background:#16181d;color:#fff;border-color:#16181d"><span class="material-symbols-outlined" style="color:#fff">check_circle</span> Saved successfully</div>` },
+  { slug: 'alert', label: 'Alert / Banner', icon: 'warning', group: 'Feedback', desc: 'Communicates an important status inline.', preview: `<div class="calert info"><span class="material-symbols-outlined">info</span> Heads up — this is informational.</div><div class="calert warn"><span class="material-symbols-outlined">warning</span> Careful — double-check this.</div><div class="calert err"><span class="material-symbols-outlined">error</span> Something went wrong.</div>` },
+  { slug: 'badge', label: 'Badge', icon: 'counter_1', group: 'Feedback', desc: 'A small count or status marker.', preview: `<div class="cbadge-wrap"><span class="material-symbols-outlined">notifications</span><span class="cbadge">3</span></div>` },
+  { slug: 'progress', label: 'Progress', icon: 'progress_activity', group: 'Feedback', desc: 'Shows completion of a task.', preview: `<div class="cprog"><div class="fill"></div></div>` },
+  { slug: 'spinner', label: 'Spinner', icon: 'autorenew', group: 'Feedback', desc: 'Indicates an indeterminate wait.', preview: `<div class="cspin"></div>` },
+  { slug: 'skeleton', label: 'Skeleton', icon: 'view_day', group: 'Feedback', desc: 'A loading placeholder for content.', preview: `<div class="cskel"><div class="ln" style="width:85%"></div><div class="ln" style="width:65%"></div><div class="ln" style="width:75%"></div></div>` },
   // Data
-  { slug: 'table', label: 'Table', icon: 'table_rows', group: 'Data' },
-  { slug: 'list', label: 'List', icon: 'list', group: 'Data' },
-  { slug: 'avatar', label: 'Avatar', icon: 'account_circle', group: 'Data' },
-  { slug: 'tag', label: 'Tag', icon: 'sell', group: 'Data' },
+  { slug: 'table', label: 'Table', icon: 'table_rows', group: 'Data', desc: 'Displays rows and columns of data.', preview: `<table class="ctable"><thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead><tbody><tr><td>Style Builder</td><td>Tokens</td><td>Active</td></tr><tr><td>Tokens Studio</td><td>Tokens</td><td>Active</td></tr></tbody></table>` },
+  { slug: 'list', label: 'List', icon: 'list', group: 'Data', desc: 'A vertical set of related items.', preview: `<div class="clist"><div><span class="material-symbols-outlined">extension</span> Plugins</div><div><span class="material-symbols-outlined">palette</span> Tokens</div><div><span class="material-symbols-outlined">widgets</span> Components</div></div>` },
+  { slug: 'avatar', label: 'Avatar', icon: 'account_circle', group: 'Data', desc: 'Represents a user or entity.', preview: `<div class="cavatar">JD</div><div class="cavatar" style="background:#e5484d">AC</div><div class="cavatar" style="background:#3b6cf6">MN</div>` },
+  { slug: 'tag', label: 'Tag', icon: 'sell', group: 'Data', desc: 'Labels and categorizes content.', preview: `<span class="ctag">Design</span><span class="ctag">Tokens</span><span class="ctag">v1.2</span>` },
 ];
 
 const overview = [];
@@ -53,18 +53,15 @@ for (const c of comps) {
   overview.push({ icon: c.icon, label: c.label, comp: c.slug, active: c.slug === 'button' });
 }
 const meta = {};
-comps.forEach((c) => { meta[c.slug] = { t: c.label, d: c.slug === 'button' ? 'Lets people take an action with a single tap.' : 'In progress — built on the Button template.' }; });
+comps.forEach((c) => { meta[c.slug] = { t: c.label, d: c.desc }; });
 const placeholders = comps.filter((c) => c.slug !== 'button');
 ---
 <Shell active="Components" title="Components" crumb="/ Button" overview={overview}>
   <Fragment set:html={buttonContent} />
   {placeholders.map((c) => (
     <section class="comp-section" id={`comp-${c.slug}`}>
-      <div class="comp-soon">
-        <span class="material-symbols-outlined">{c.icon}</span>
-        <b>{c.label} — in progress</b>
-        <p>Will follow the same template as Button: Overview · Variants · Anatomy · States · Specs · Guidelines · Accessibility.</p>
-      </div>
+      <p class="tk-desc">{c.desc}</p>
+      <div class="cmp-stage" set:html={c.preview}></div>
     </section>
   ))}
   <script id="compData" type="application/json" set:html={JSON.stringify(meta)}></script>
