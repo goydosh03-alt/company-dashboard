@@ -20,6 +20,23 @@ window.ddPick = function (el) {
 };
 document.addEventListener('click', () => document.querySelectorAll('.dd.open').forEach((d) => d.classList.remove('open')));
 
+// Theme toggle (light ⇄ dark). Persists in localStorage; no-flash applied in <head>.
+window.toggleTheme = function () {
+  var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (dark) { document.documentElement.removeAttribute('data-theme'); try { localStorage.setItem('theme', 'light'); } catch (e) {} }
+  else { document.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('theme', 'dark'); } catch (e) {} }
+  syncThemeIcon();
+};
+function syncThemeIcon() {
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  var ic = btn.querySelector('.material-symbols-outlined');
+  var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (ic) ic.textContent = dark ? 'light_mode' : 'dark_mode';
+  btn.title = dark ? 'Switch to light' : 'Switch to dark';
+}
+syncThemeIcon();
+
 // L2 sub-head: sticky line appears on scroll
 (function () {
   const sub = document.querySelector('.sub');

@@ -10,6 +10,7 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script is:inline>(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
   <title>junoo.digital · Storybook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,7 +60,7 @@ const REPO = 'https://github.com/goydosh03-alt/company-dashboard';
           <h1>{title}</h1>
           <span class="crumb" id="pageCrumb">{crumb}</span>
           <div class="search" onclick="openSearch()"><span class="material-symbols-outlined">search</span><input placeholder="Search the guide…" readonly /><kbd>⌘K</kbd></div>
-          <button class="icon-btn"><span class="material-symbols-outlined">dark_mode</span></button>
+          <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme"><span class="material-symbols-outlined">dark_mode</span></button>
         </header>
         <main class="content">
           <slot />
